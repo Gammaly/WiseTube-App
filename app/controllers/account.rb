@@ -3,8 +3,8 @@
 require 'roda'
 require_relative './app'
 
-module Credence
-  # Web controller for Credence API
+module WiseTube
+  # Web controller for WiseTube API
   class App < Roda
     route('account') do |routing|
       routing.on do

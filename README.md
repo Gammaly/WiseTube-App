@@ -1,6 +1,6 @@
-# Credence App
+# WiseTube App
 
-Web application for Credence system that allows teams to share sensitive files such as configuration information, credentials, etc.
+Web application for WiseTube system that allows teams to share sensitive files such as configuration information, credentials, etc.
 
 Please also note the Web API that it uses: https://github.com/Gammaly/WiseTube-Api
 

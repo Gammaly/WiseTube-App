@@ -60,12 +60,12 @@ module WiseTube
             view :register
           end
 
-        # POST /auth/register
-        routing.post do
-          account_data = JsonRequestBody.symbolize(routing.params)
-          VerifyRegistration.new(App.config).call(account_data)
+          # POST /auth/register
+          routing.post do
+            account_data = JsonRequestBody.symbolize(routing.params)
+            VerifyRegistration.new(App.config).call(account_data)
 
-          flash[:notice] = 'Please check your email for a verification link'
+            flash[:notice] = 'Please check your email for a verification link'
             routing.redirect '/'
           rescue VerifyRegistration::ApiServerError => e
             App.logger.warn "API server error: #{e.inspect}\n#{e.backtrace}"

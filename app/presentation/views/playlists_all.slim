@@ -1,0 +1,16 @@
+div class="row" style="vertical-align: bottom;"
+  div class="col-xs-9"
+    h3 All Playlists
+  div class="col-xs-3"
+table class="table"
+  thead
+    tr
+      th Playlist name
+      th Playlists URL
+  tbody
+    - playlists.all.each do |playlist|
+      tr
+        td 
+          a href="/account/playlists/#{playlist.id}" #{playlist.name}
+          td 
+            a href="#{playlist.playlist_url}" #{playlist.playlist_url}

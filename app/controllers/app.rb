@@ -2,6 +2,7 @@
 
 require 'roda'
 require 'slim'
+require 'slim/include'
 
 module WiseTube
   # Base class for WiseTube Web Application

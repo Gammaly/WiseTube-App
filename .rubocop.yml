@@ -30,3 +30,8 @@ Style/SymbolArray:
   Exclude:
     - db/migrations/**/*
     - Rakefile
+
+Style/RedundantRegexpEscape:
+  Enabled: true
+  Exclude:
+    - app/forms/form_base.rb

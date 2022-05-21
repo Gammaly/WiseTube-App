@@ -1,0 +1,66 @@
+h2
+  == "#{playlist.name}"
+
+dl
+  div class="row"
+    div class="col-xs-3"
+      dt Playlist Playlistsitory:
+    div class="col-xs-9"
+      dd class="blockquote"
+        a href="#{playlist.playlist_url}" #{playlist.playlist_url}
+
+div class="row"
+  div class="col-lg-9"
+    div class="row"
+      table class="table"
+        thead
+          tr
+            th Link
+            th Description
+        tbody
+          - playlist.links.each do |link|
+            tr
+              td 
+                a href="/links/#{link.id}"
+                  == "#{link.title}"
+              td #{link.description}
+    div class="row"
+      div class="col-xs-4"
+        - if playlist.policies.can_add_links
+          button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newLinkModal" + New Link
+    div class="row" style="height:10px;"
+  div class="col-lg-3"
+    div class="panel panel-default"
+      div class="panel-heading" Collaborators
+      div class="panel-body"
+        - if playlist.collaborators.empty?
+          span class="small" There are no collaborators yet
+        ul class="list-group"
+          li class="list-group-item clearfix"
+              = playlist.owner.username
+          - playlist.collaborators.each do |collaborator|
+            li class="list-group-item clearfix"
+              '  #{collaborator.username}
+              - if playlist.policies.can_remove_collaborators
+                span class="float-end"
+                  form role='form' method='post' action="/playlists/#{playlist.id}/collaborators"
+                    input type='hidden' name='action' value='remove'
+                    input type='hidden' name='email' value="#{collaborator.email}"
+                    button type="submit" class="btn btn-xs btn-default"
+                      span class="fas fa-user-times"
+        - if playlist.policies.can_add_collaborators
+          button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newCollaboratorModal" + Add Collaborator
+
+include :link_new_partial
+include :collaborator_new_partial
+
+.row
+  .text-center
+    - if playlist.policies.can_edit
+      a href="" edit playlist
+    - if playlist.policies.can_delete
+      == ' | '
+      a href="" delete playlist
+    - if playlist.policies.can_leave
+      == ' | '
+      a href="" leave playlist

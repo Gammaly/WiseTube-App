@@ -10,7 +10,7 @@ require_relative '../require_app'
 
 require_app('lib')
 
-module WiseTube
+module Credence
   # Configuration for the API
   class App < Roda
     plugin :environments

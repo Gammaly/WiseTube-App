@@ -2,10 +2,10 @@
 
 require_relative 'form_base'
 
-module Credence
+module WiseTube
   module Form
-    class NewProject < Dry::Validation::Contract
-      config.messages.load_paths << File.join(__dir__, 'errors/new_project.yml')
+    class NewPlaylist < Dry::Validation::Contract
+      config.messages.load_paths << File.join(__dir__, 'errors/new_playlist.yml')
 
       params do
         required(:name).filled

@@ -1,18 +1,18 @@
 h2 
-  a href="/projects/#{document.project.id}" #{document.project.name}
-h3 URL and Title: #{File.join(document.url, document.title)}
+  a href="/playlists/#{link.playlist.id}" #{link.playlist.name}
+h3 URL and Title: #{File.join(link.url, link.title)}
 
 dl
   div class="row"
     div class="col-xs-3"
       dt Description:
     div class="col-xs-9"
-      dd class="blockquote" #{document.description}
+      dd class="blockquote" #{link.description}
     div class="col-xs-3"
-      dt Document:
+      dt Link:
     div class="col-xs-9"
       dd class="blockquote"
-        a data-bs-toggle="collapse" href="#document" aria-expanded="false" aria-controls="document" show document
-        div id="document" class="collapse"
+        a data-bs-toggle="collapse" href="#link" aria-expanded="false" aria-controls="link" show link
+        div id="link" class="collapse"
           dov class="card card-body"
-            pre class="force-wrap" #{document.image}
+            pre class="force-wrap" #{link.image}

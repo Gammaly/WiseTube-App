@@ -4,12 +4,12 @@ module WiseTube
   # Behaviors of the currently logged in account
   class Playlist
     attr_reader :id, :name, :playlist_url # basic info
-                :owner, :collaborators, :documents, :policies # full details
+                :owner, :collaborators, :links, :policies # full details
 
     def initialize(playlist_info)
-      process_attributes(proj_info['attributes'])
-      process_relationships(proj_info['relationships'])
-      process_policies(proj_info['policies'])
+      process_attributes(playlist_info['attributes'])
+      process_relationships(playlist_info['relationships'])
+      process_policies(playlist_info['policies'])
     end
 
     private
@@ -17,7 +17,7 @@ module WiseTube
     def process_attributes(attributes)
       @id = attributes['id']
       @name = attributes['name']
-      @repo_url = attributes['repo_url']
+      @playlist_url = attributes['playlist_url']
     end
 
     def process_relationships(relationships)
@@ -25,17 +25,17 @@ module WiseTube
 
       @owner = Account.new(relationships['owner'])
       @collaborators = process_collaborators(relationships['collaborators'])
-      @documents = process_documents(relationships['documents'])
+      @links = process_links(relationships['links'])
     end
 
     def process_policies(policies)
       @policies = OpenStruct.new(policies)
     end
 
-    def process_documents(documents_info)
-      return nil unless documents_info
+    def process_links(links_info)
+      return nil unless links_info
 
-      documents_info.map { |doc_info| Document.new(doc_info) }
+      links_info.map { |link_info| Link.new(link_info) }
     end
 
     def process_collaborators(collaborators)

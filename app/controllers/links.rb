@@ -2,20 +2,20 @@
 
 require 'roda'
 
-module Credence
-  # Web controller for Credence API
+module WiseTube
+  # Web controller for WiseTube API
   class App < Roda
-    route('documents') do |routing|
+    route('links') do |routing|
       routing.redirect '/auth/login' unless @current_account.logged_in?
 
-      # GET /documents/[doc_id]
-      routing.get(String) do |doc_id|
-        doc_info = GetDocument.new(App.config)
-                              .call(@current_account, doc_id)
-        document = Document.new(doc_info)
+      # GET /links/[link_id]
+      routing.get(String) do |link_id|
+        link_info = GetLink.new(App.config)
+                              .call(@current_account, link_id)
+        link = Link.new(link_info)
 
-        view :document, locals: {
-          current_account: @current_account, document: document
+        view :link, locals: {
+          current_account: @current_account, link: link
         }
       end
     end

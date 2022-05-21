@@ -2,9 +2,9 @@
 
 require 'http'
 
-module Credence
-  # Create a new configuration file for a project
-  class CreateNewProject
+module WiseTube
+  # Create a new configuration file for a playlist
+  class CreateNewPlaylist
     def initialize(config)
       @config = config
     end
@@ -13,10 +13,10 @@ module Credence
       @config.API_URL
     end
 
-    def call(current_account:, project_data:)
-      config_url = "#{api_url}/projects"
+    def call(current_account:, playlist_data:)
+      config_url = "#{api_url}/playlists"
       response = HTTP.auth("Bearer #{current_account.auth_token}")
-                    .post(config_url, json: project_data)
+                    .post(config_url, json: playlist_data)
 
       response.code == 201 ? JSON.parse(response.body.to_s) : raise
     end

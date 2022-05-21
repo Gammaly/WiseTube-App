@@ -8,28 +8,28 @@ module WiseTube
     route('playlists') do |routing|
       routing.on do
         routing.redirect '/auth/login' unless @current_account.logged_in?
-        @projects_route = '/projects'
+        @playlists_route = '/playlists'
 
-        routing.on(String) do |proj_id|
-          @project_route = "#{@projects_route}/#{proj_id}"
+        routing.on(String) do |playlist_id|
+          @playlist_route = "#{@playlists_route}/#{playlist_id}"
 
-          # GET /projects/[proj_id]
+          # GET /playlists/[playlist_id]
           routing.get do
-            proj_info = GetProject.new(App.config).call(
-              @current_account, proj_id
+            playlist_info = GetPlaylist.new(App.config).call(
+              @current_account, playlist_id
             )
-            project = Project.new(proj_info)
+            playlist = Playlist.new(playlist_info)
 
-            view :project, locals: {
-              current_account: @current_account, project: project
+            view :playlist, locals: {
+              current_account: @current_account, playlist: playlist
             }
           rescue StandardError => e
             puts "#{e.inspect}\n#{e.backtrace}"
-            flash[:error] = 'Project not found'
-            routing.redirect @projects_route
+            flash[:error] = 'Playlist not found'
+            routing.redirect @playlists_route
           end
 
-          # POST /projects/[proj_id]/collaborators
+          # POST /playlists/[playlist_id]/collaborators
           routing.post('collaborators') do
             action = routing.params['action']
             collaborator_info = Form::CollaboratorEmail.new.call(routing.params)
@@ -40,46 +40,46 @@ module WiseTube
 
             task_list = {
               'add' => { service: AddCollaborator,
-                         message: 'Added new collaborator to project' },
+                         message: 'Added new collaborator to playlist' },
               'remove' => { service: RemoveCollaborator,
-                            message: 'Removed collaborator from project' }
+                            message: 'Removed collaborator from playlist' }
             }
 
             task = task_list[action]
             task[:service].new(App.config).call(
               current_account: @current_account,
               collaborator: collaborator_info,
-              project_id: proj_id
+              playlist_id: playlist_id
             )
             flash[:notice] = task[:message]
 
           rescue StandardError
             flash[:error] = 'Could not find collaborator'
           ensure
-            routing.redirect @project_route
+            routing.redirect @playlist_route
           end
 
-          # POST /projects/[proj_id]/documents/
-          routing.post('documents') do
-            document_data = Form::NewDocument.new.call(routing.params)
-            if document_data.failure?
-              flash[:error] = Form.message_values(document_data)
+          # POST /playlists/[playlist_id]/links/
+          routing.post('links') do
+            link_data = Form::NewLink.new.call(routing.params)
+            if link_data.failure?
+              flash[:error] = Form.message_values(link_data)
               routing.halt
             end
 
-            CreateNewDocument.new(App.config).call(
+            CreateNewLink.new(App.config).call(
               current_account: @current_account,
-              project_id: proj_id,
-              document_data: document_data.to_h
+              playlist_id: playlist_id,
+              link_data: link_data.to_h
             )
 
-            flash[:notice] = 'Your document was added'
+            flash[:notice] = 'Your link was added'
           rescue StandardError => error
             puts error.inspect
             puts error.backtrace
-            flash[:error] = 'Could not add document'
+            flash[:error] = 'Could not add link'
           ensure
-            routing.redirect @project_route
+            routing.redirect @playlist_route
           end
         end
 
@@ -89,32 +89,32 @@ module WiseTube
 
           playlists = Playlists.new(playlist_list)
 
-          view :projects_all, locals: {
-            current_account: @current_account, projects: projects
+          view :playlists_all, locals: {
+            current_account: @current_account, playlists: playlists
           }
         end
 
-        # POST /projects/
+        # POST /playlists/
         routing.post do
           routing.redirect '/auth/login' unless @current_account.logged_in?
           puts "PROJ: #{routing.params}"
-          project_data = Form::NewProject.new.call(routing.params)
-          if project_data.failure?
-            flash[:error] = Form.message_values(project_data)
+          playlist_data = Form::NewPlaylist.new.call(routing.params)
+          if playlist_data.failure?
+            flash[:error] = Form.message_values(playlist_data)
             routing.halt
           end
 
-          CreateNewProject.new(App.config).call(
+          CreateNewPlaylist.new(App.config).call(
             current_account: @current_account,
-            project_data: project_data.to_h
+            playlist_data: playlist_data.to_h
           )
 
-          flash[:notice] = 'Add documents and collaborators to your new project'
+          flash[:notice] = 'Add links and collaborators to your new playlist'
         rescue StandardError => e
-          puts "FAILURE Creating Project: #{e.inspect}"
-          flash[:error] = 'Could not create project'
+          puts "FAILURE Creating Playlist: #{e.inspect}"
+          flash[:error] = 'Could not create playlist'
         ensure
-          routing.redirect @projects_route
+          routing.redirect @playlists_route
         end
       end
     end

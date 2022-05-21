@@ -1,11 +1,11 @@
-div id="newDocumentModal" class="modal fade" role="dialog"
+div id="newLinkModal" class="modal fade" role="dialog"
   div class="modal-dialog"
     div class="modal-content"
       div class="modal-header"
-        h4 New Document
+        h4 New Link
         button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
       div class="modal-body"
-        form role="form" action="/projects/#{project.id}/documents" method='post' id='new-document-form'
+        form role="form" action="/playlists/#{playlist.id}/links" method='post' id='new-link-form'
           div class="form-group"
             label for='title_input' Title:
             input type='text' name='title' id='title_input' class="form-control" placeholder="Title is required"

@@ -2,7 +2,7 @@
 
 require_relative 'form_base'
 
-module Credence
+module WiseTube
   module Form
     class CollaboratorEmail < Dry::Validation::Contract
       config.messages.load_paths << File.join(__dir__, 'errors/account_details.yml')

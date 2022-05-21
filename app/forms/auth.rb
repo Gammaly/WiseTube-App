@@ -2,7 +2,7 @@
 
 require_relative 'form_base'
 
-module Credence
+module WiseTube
   module Form
     class LoginCredentials < Dry::Validation::Contract
       params do

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require_relative 'project'
+require_relative 'playlist'
 
-module Credence
+module WiseTube
   # Behaviors of the currently logged in account
-  class Document
+  class Link
     attr_reader :id, :title, :description, # basic info
                 :url, :image,
-                :project # full details
+                :playlist # full details
 
     def initialize(info)
       process_attributes(info['attributes'])
@@ -25,7 +25,7 @@ module Credence
     end
 
     def process_included(included)
-      @project = Project.new(included['project'])
+      @playlist = Playlist.new(included['playlist'])
     end
   end
 end

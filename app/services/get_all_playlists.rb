@@ -2,9 +2,9 @@
 
 require 'http'
 
-module Credence
-  # Returns all projects belonging to an account
-  class GetAllProjects
+module WiseTube
+  # Returns all playlists belonging to an account
+  class GetAllPlaylists
     def initialize(config)
       @config = config
     end

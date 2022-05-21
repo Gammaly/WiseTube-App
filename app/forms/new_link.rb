@@ -2,10 +2,10 @@
 
 require_relative 'form_base'
 
-module Credence
+module WiseTube
   module Form
-    class NewDocument < Dry::Validation::Contract
-      config.messages.load_paths << File.join(__dir__, 'errors/new_document.yml')
+    class NewLink < Dry::Validation::Contract
+      config.messages.load_paths << File.join(__dir__, 'errors/new_link.yml')
 
       params do
         required(:title).filled(max_size?: 256, format?: FILENAME_REGEX)

@@ -1,0 +1,7 @@
+en:
+  errors:
+    title: 'provide title with up to 255 legal characters'
+    title_valid?: 'title has illegal characters (e.g., & | \\ / <tab>'
+    description: 'provide a description'
+    url: 'provide url for link'
+    image: 'provide image for link'

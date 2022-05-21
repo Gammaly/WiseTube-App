@@ -1,0 +1,4 @@
+en:
+  errors:
+    name: 'Playlist name must be filled'
+    playlist_url: 'URL must be in proper format'

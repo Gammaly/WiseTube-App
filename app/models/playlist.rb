@@ -3,7 +3,7 @@
 module WiseTube
   # Behaviors of the currently logged in account
   class Playlist
-    attr_reader :id, :name, :playlist_url # basic info
+    attr_reader :id, :name, :playlist_url, # basic info
                 :owner, :collaborators, :links, :policies # full details
 
     def initialize(playlist_info)

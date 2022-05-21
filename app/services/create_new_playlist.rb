@@ -16,7 +16,7 @@ module WiseTube
     def call(current_account:, playlist_data:)
       config_url = "#{api_url}/playlists"
       response = HTTP.auth("Bearer #{current_account.auth_token}")
-                    .post(config_url, json: playlist_data)
+                     .post(config_url, json: playlist_data)
 
       response.code == 201 ? JSON.parse(response.body.to_s) : raise
     end

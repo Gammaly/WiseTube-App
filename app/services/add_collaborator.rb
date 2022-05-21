@@ -15,7 +15,7 @@ module WiseTube
 
     def call(current_account:, collaborator:, playlist_id:)
       response = HTTP.auth("Bearer #{current_account.auth_token}")
-                    .put("#{api_url}/playlists/#{playlist_id}/collaborators",
+                     .put("#{api_url}/playlists/#{playlist_id}/collaborators",
                           json: { email: collaborator[:email] })
 
       raise CollaboratorNotAdded unless response.code == 200

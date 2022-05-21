@@ -15,8 +15,8 @@ module WiseTube
 
     def call(current_account:, collaborator:, playlist_id:)
       response = HTTP.auth("Bearer #{current_account.auth_token}")
-                    .delete("#{api_url}/playlists/#{playlist_id}/collaborators",
-                            json: { email: collaborator[:email] })
+                     .delete("#{api_url}/playlists/#{playlist_id}/collaborators",
+                             json: { email: collaborator[:email] })
 
       raise CollaboratorNotRemoved unless response.code == 200
     end

@@ -24,7 +24,7 @@ module WiseTube
           end
 
           authenticated = AuthenticateAccount.new(App.config)
-            .call(**credentials.values)
+                                             .call(**credentials.values)
 
           current_account = Account.new(
             authenticated[:account],

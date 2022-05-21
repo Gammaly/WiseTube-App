@@ -11,7 +11,7 @@ module WiseTube
 
     def call(current_account)
       response = HTTP.auth("Bearer #{current_account.auth_token}")
-                    .get("#{@config.API_URL}/playlists")
+                     .get("#{@config.API_URL}/playlists")
 
       response.code == 200 ? JSON.parse(response.to_s)['data'] : nil
     end

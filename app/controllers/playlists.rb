@@ -21,7 +21,7 @@ module WiseTube
             playlist = Playlist.new(playlist_info)
 
             view :playlist, locals: {
-              current_account: @current_account, playlist: playlist
+              current_account: @current_account, playlist:
             }
           rescue StandardError => e
             puts "#{e.inspect}\n#{e.backtrace}"
@@ -49,7 +49,7 @@ module WiseTube
             task[:service].new(App.config).call(
               current_account: @current_account,
               collaborator: collaborator_info,
-              playlist_id: playlist_id
+              playlist_id:
             )
             flash[:notice] = task[:message]
 
@@ -69,14 +69,14 @@ module WiseTube
 
             CreateNewLink.new(App.config).call(
               current_account: @current_account,
-              playlist_id: playlist_id,
+              playlist_id:,
               link_data: link_data.to_h
             )
 
             flash[:notice] = 'Your link was added'
-          rescue StandardError => error
-            puts error.inspect
-            puts error.backtrace
+          rescue StandardError => e
+            puts e.inspect
+            puts e.backtrace
             flash[:error] = 'Could not add link'
           ensure
             routing.redirect @playlist_route
@@ -90,7 +90,7 @@ module WiseTube
           playlists = Playlists.new(playlist_list)
 
           view :playlists_all, locals: {
-            current_account: @current_account, playlists: playlists
+            current_account: @current_account, playlists:
           }
         end
 

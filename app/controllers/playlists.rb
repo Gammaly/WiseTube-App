@@ -75,8 +75,7 @@ module WiseTube
 
             flash[:notice] = 'Your link was added'
           rescue StandardError => e
-            puts e.inspect
-            puts e.backtrace
+            puts "ERROR CREATING DOCUMENT: #{e.inspect}"
             flash[:error] = 'Could not add link'
           ensure
             routing.redirect @playlist_route
@@ -97,7 +96,7 @@ module WiseTube
         # POST /playlists/
         routing.post do
           routing.redirect '/auth/login' unless @current_account.logged_in?
-          puts "PROJ: #{routing.params}"
+
           playlist_data = Form::NewPlaylist.new.call(routing.params)
           if playlist_data.failure?
             flash[:error] = Form.message_values(playlist_data)

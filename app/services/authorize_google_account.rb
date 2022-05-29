@@ -4,11 +4,11 @@ require 'http'
 
 module WiseTube
   # Returns an authenticated user, or nil
-  class AuthorizeGithubAccount
+  class AuthorizeGoogleAccount
     # Errors emanating from Github
     class UnauthorizedError < StandardError
       def message
-        'Could not login with Github'
+        'Could not login with Google'
       end
     end
 
@@ -17,19 +17,22 @@ module WiseTube
     end
 
     def call(code)
-      access_token = get_access_token_from_github(code)
+      access_token = get_access_token_from_google(code)
       get_sso_account_from_api(access_token)
     end
 
     private
 
-    def get_access_token_from_github(code)
+    def get_access_token_from_google(code)
       challenge_response =
         HTTP.headers(accept: 'application/json')
-            .post(@config.GH_TOKEN_URL,
-                  form: { client_id: @config.GH_CLIENT_ID,
-                          client_secret: @config.GH_CLIENT_SECRET,
-                          code: code })
+            .post(@config.GOOGLE_TOKEN_URL,
+                  form: { client_id: @config.GOOGLE_CLIENT_ID,
+                          client_secret: @config.GOOGLE_CLIENT_SECRET,
+                          code: code,
+                          grant_type: "authorization_code",
+                          redirect_uri: @config.GOOGLE_REDIRECT_URI})
+      puts challenge_response
       raise UnauthorizedError unless challenge_response.status < 400
 
       JSON.parse(challenge_response)['access_token']
@@ -37,7 +40,7 @@ module WiseTube
 
     def get_sso_account_from_api(access_token)
       response =
-        HTTP.post("#{@config.API_URL}/auth/gh_sso",
+        HTTP.post("#{@config.API_URL}/auth/google_sso",
                   json: { access_token: access_token })
       raise if response.code >= 400
 

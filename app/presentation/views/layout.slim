@@ -1,22 +1,110 @@
-linktype html
-htmlssss
+doctype html
+html
   head
     title WiseTube
-    
-    / Themed Bootstrap CSS (Cerulean Theme) - see bootswatch.com for more themes
-    / - default Bootstrap CSS: https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css
-    link rel="stylesheet" href="https://bootswatch.com/5/cerulean/bootstrap.min.css"
-    link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.3/css/all.min.css"
+    /link href="https://raw.githubusercontent.com/SOA-GOAT/SECond/mvc/images/favicon.ico" rel="icon"
 
+    / Bootstrap CSS and theme (Darkly Theme)
+    link{
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/flatly/bootstrap.min.css"
+      integrity="sha384-qF/QmIAj5ZaYFAeQcrQ6bfVMAh4zZlrGwTPY7T/M+iTTLJqJBJjwwnsE5Y0mV7QK"
+      crossorigin="anonymous"
+    }
+        / Fontawesome icons
+    link{
+      rel="stylesheet" 
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" 
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" 
+      crossorigin="anonymous"
+    }
     / Custom CSS
+    link rel='stylesheet' href='assets/css/style.css'
     == assets(:css)
   body
-    / Popper & Bootstrap Javascript (Load in this order)
-    script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+    / Popper
+    script{ 
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous" 
+    }i
+    / Bootstrap
+    script{
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    }
 
-    == render :nav
-    div class='container' id='html_body'
+    / Chart.js
+    script{
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"
+      integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    }
+    
+    / X-Frame-Bypass
+    / script{
+      type="module"
+      src="https://unpkg.com/x-frame-bypass"
+    /}
+    /Wordcloud2.js
+    script{
+      src="https://cdn.bootcdn.net/ajax/libs/wordcloud2.js/1.2.2/wordcloud2.js"
+    }
+
+    .container id='html_body'
+      nav.navbar.navbar-expand-lg.navbar-light.bg-light.rounded
+        a.navbar-brand href="/"
+          img.d-inline-block.align-top {
+            alt="" height="30" src="https://raw.githubusercontent.com/SOA-GOAT/SECond/mvc/images/banner.png"
+          }
+
+        button.navbar-toggler aria-controls="navbarText" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarText" data-toggle="collapse" type="button" 
+          span.navbar-toggler-icon
+        #navbarText.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            li.nav-item.active
+              a.nav-link href="/" 
+                | Home
+                span.sr-only (current)
+            li.nav-item
+              a.nav-link href="/#features"  Features
+            li.nav-item
+              a.nav-link href="/#team_members"  Team Members
+          span.navbar-text
+            | Have a great day!
+
+      / section
+      /   .row style="vertical-align: middle;"
+      /     .col-12
+      /       h1 
+      /         a.text-underline-hover href="/" WiseTube
       section
-        == render :flash_bar
+        include :flash_bar
         == yield
+
+      footer
+        = "We cannot warrant full correctness of all content. WiseTube may use cookies for sessions but does not track users."
+/ linktype html
+/ htmlssss
+/   head
+/     title WiseTube
+    
+/     / Themed Bootstrap CSS (Cerulean Theme) - see bootswatch.com for more themes
+/     / - default Bootstrap CSS: https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css
+/     link rel="stylesheet" href="https://bootswatch.com/5/cerulean/bootstrap.min.css"
+/     link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@5.15.3/css/all.min.css"
+
+/     / Custom CSS
+/     == assets(:css)
+/   body
+/     / Popper & Bootstrap Javascript (Load in this order)
+/     script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+/     script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+
+/     == render :nav
+/     div class='container' id='html_body'
+/       section
+/         == render :flash_bar
+/         == yield

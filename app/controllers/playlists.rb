@@ -18,8 +18,9 @@ module WiseTube
             playlist_info = GetPlaylist.new(App.config).call(
               @current_account, playlist_id
             )
-            playlist = Playlist.new(playlist_info)
 
+            playlist = Playlist.new(playlist_info)
+            puts playlist
             view :playlist, locals: {
               current_account: @current_account, playlist:
             }

@@ -18,23 +18,24 @@ module WiseTube
       @id = attributes['id']
       @name = attributes['name']
       @playlist_url = attributes['playlist_url']
+      puts "process_attributes #{@id}" 
     end
 
     def process_relationships(relationships)
       return unless relationships
-
+      puts "process_relationships"
       @owner = Account.new(relationships['owner'])
       @collaborators = process_collaborators(relationships['collaborators'])
       @links = process_links(relationships['links'])
     end
 
     def process_policies(policies)
-      @policies = Struct.new(policies)
+      @policies = OpenStruct.new(policies)
     end
 
     def process_links(links_info)
       return nil unless links_info
-
+      puts "process_links"
       links_info.map { |link_info| Link.new(link_info) }
     end
 

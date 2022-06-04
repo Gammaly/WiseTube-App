@@ -20,7 +20,7 @@ module WiseTube
             )
 
             playlist = Playlist.new(playlist_info)
-            puts playlist
+
             view :playlist, locals: {
               current_account: @current_account, playlist:
             }

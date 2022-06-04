@@ -2,7 +2,7 @@
 
 require 'http'
 
-# Returns all projects belonging to an account
+# Returns all playlists belonging to an account
 class GetAccountDetails
   # Error for accounts that cannot be created
   class InvalidAccount < StandardError
@@ -23,6 +23,6 @@ class GetAccountDetails
     data = JSON.parse(response)['data']
     account_details = data['attributes']['account']
     auth_token = data['attributes']['auth_token']
-    Credence::Account.new(account_details, auth_token)
+    WiseTube::Account.new(account_details, auth_token)
   end
 end

@@ -4,14 +4,35 @@ require 'roda'
 require_relative './app'
 
 module WiseTube
-  # Web controller for WiseTube API
+  # Web controller for WiseTube APP
   class App < Roda
+    def gh_oauth_url(config)
+      url = config.GH_OAUTH_URL
+      client_id = config.GH_CLIENT_ID
+      scope = config.GH_SCOPE
+
+      "#{url}?client_id=#{client_id}&scope=#{scope}"
+    end
+
+    def google_oauth_url(config)
+      url = config.GOOGLE_OAUTH_URL
+      client_id = config.GOOGLE_CLIENT_ID
+      scope = config.GOOGLE_SCOPE
+      redirect_uri = config.GOOGLE_REDIRECT_URI
+
+      "#{url}?client_id=#{client_id}&scope=#{scope}&response_type=code&redirect_uri=#{redirect_uri}"
+    end
+
     route('auth') do |routing|
+      @oauth_callback = '/auth/gh_sso_callback'
       @login_route = '/auth/login'
       routing.is 'login' do
         # GET /auth/login
         routing.get do
-          view :login
+          view :login, locals: {
+            gh_oauth_url: gh_oauth_url(App.config),
+            google_oauth_url: google_oauth_url(App.config)
+          }
         end
 
         # POST /auth/login
@@ -23,8 +44,7 @@ module WiseTube
             routing.redirect @login_route
           end
 
-          authenticated = AuthenticateAccount.new(App.config)
-                                             .call(**credentials.values)
+          authenticated = AuthenticateAccount.new.call(**credentials.values)
 
           current_account = Account.new(
             authenticated[:account],
@@ -34,14 +54,70 @@ module WiseTube
           CurrentSession.new(session).current_account = current_account
 
           flash[:notice] = "Welcome back #{current_account.username}!"
-          routing.redirect '/'
-        rescue AuthenticateAccount::UnauthorizedError
-          flash.now[:error] = 'Username and password did not match our records'
+          routing.redirect '/playlists'
+        rescue AuthenticateAccount::NotAuthenticatedError
+          flash[:error] = 'Username and password did not match our records'
           response.status = 401
-          view :login
+          routing.redirect @login_route
         rescue AuthenticateAccount::ApiServerError => e
           App.logger.warn "API server error: #{e.inspect}\n#{e.backtrace}"
           flash[:error] = 'Our servers are not responding -- please try later'
+          response.status = 500
+          routing.redirect @login_route
+        end
+      end
+
+      routing.is 'gh_sso_callback' do
+        # GET /auth/gh_sso_callback
+        routing.get do
+          authorized = AuthorizeGithubAccount
+                       .new(App.config)
+                       .call(routing.params['code'])
+
+          current_account = Account.new(
+            authorized[:account],
+            authorized[:auth_token]
+          )
+
+          CurrentSession.new(session).current_account = current_account
+
+          flash[:notice] = "Welcome #{current_account.username}!"
+          routing.redirect '/playlists'
+        rescue AuthorizeGithubAccount::UnauthorizedError
+          flash[:error] = 'Could not login with Github'
+          response.status = 403
+          routing.redirect @login_route
+        rescue StandardError => e
+          puts "SSO LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
+          flash[:error] = 'Unexpected API Error'
+          response.status = 500
+          routing.redirect @login_route
+        end
+      end
+
+      routing.is 'google_sso_callback' do
+        # GET /auth/google_sso_callback
+        routing.get do
+          authorized = AuthorizeGoogleAccount
+                       .new(App.config)
+                       .call(routing.params['code'])
+
+          current_account = Account.new(
+            authorized[:account],
+            authorized[:auth_token]
+          )
+
+          CurrentSession.new(session).current_account = current_account
+
+          flash[:notice] = "Welcome #{current_account.username}!"
+          routing.redirect '/playlists'
+        rescue AuthorizeGoogleAccount::UnauthorizedError
+          flash[:error] = 'Could not login with Google'
+          response.status = 403
+          routing.redirect @login_route
+        rescue StandardError => e
+          puts "SSO LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
+          flash[:error] = 'Unexpected API Error'
           response.status = 500
           routing.redirect @login_route
         end

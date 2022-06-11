@@ -24,7 +24,6 @@ module WiseTube
     end
 
     route('auth') do |routing|
-      @oauth_callback = '/auth/gh_sso_callback'
       @login_route = '/auth/login'
       routing.is 'login' do
         # GET /auth/login
@@ -44,7 +43,8 @@ module WiseTube
             routing.redirect @login_route
           end
 
-          authenticated = AuthenticateAccount.new.call(**credentials.values)
+          authenticated = AuthenticateAccount.new(App.config)
+             .call(**credentials.values)
 
           current_account = Account.new(
             authenticated[:account],
@@ -56,14 +56,14 @@ module WiseTube
           flash[:notice] = "Welcome back #{current_account.username}!"
           routing.redirect '/playlists'
         rescue AuthenticateAccount::NotAuthenticatedError
-          flash[:error] = 'Username and password did not match our records'
+          flash.now[:error] = 'Username and password did not match our records'
           response.status = 401
           routing.redirect @login_route
         rescue AuthenticateAccount::ApiServerError => e
           App.logger.warn "API server error: #{e.inspect}\n#{e.backtrace}"
           flash[:error] = 'Our servers are not responding -- please try later'
           response.status = 500
-          routing.redirect @login_route
+          view :login
         end
       end
 

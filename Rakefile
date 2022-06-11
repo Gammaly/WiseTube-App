@@ -5,7 +5,7 @@ require "rake/testtask"
 require "./require_app"
 
 task :print_env do
-  puts "Environment: #{ENV.fetch("RACK_ENV", "development")}"
+  puts "Environment: #{ENV['RACK_ENV'] || 'development'}"
 end
 
 desc "Run application console (pry)"
@@ -41,7 +41,6 @@ end
 
 namespace :run do
   # Run in development mode
-  desc "Run Web App in development mode"
   task :dev do
     sh "rackup -p 9292"
   end

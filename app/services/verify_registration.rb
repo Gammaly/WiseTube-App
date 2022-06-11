@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "http"
+require 'http'
 
 module WiseTube
   # Returns an authenticated user, or nil
@@ -12,16 +12,17 @@ module WiseTube
       @config = config
     end
 
+    # rubocop:disable Metrics/MethodLength
     def call(registration_data)
-      puts("===============================")
+      # puts("===============================")
       puts(registration_data)
       registration_token = SecureMessage.encrypt(registration_data)
-      registration_data["verification_url"] =
+      registration_data['verification_url'] =
         "#{@config.APP_URL}/auth/register/#{registration_token}"
 
       response = HTTP.post(
         "#{@config.API_URL}/auth/register",
-        json: SignedMessage.sign(registration_data),
+        json: SignedMessage.sign(registration_data)
       )
 
       raise(VerificationError) unless response.code == 202
@@ -30,5 +31,6 @@ module WiseTube
     rescue HTTP::ConnectionError
       raise(ApiServerError)
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

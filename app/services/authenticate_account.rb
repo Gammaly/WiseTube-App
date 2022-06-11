@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "http"
+require 'http'
 
 module WiseTube
   # Returns an authenticated user, or nil
@@ -10,18 +10,18 @@ module WiseTube
     class ApiServerError < StandardError; end
 
     def call(username:, password:)
-      credentials = { username: username, password: password }
+      credentials = { username:, password: }
 
-      response = HTTP.post("#{ENV["API_URL"]}/auth/authenticate",
+      response = HTTP.post("#{ENV.fetch('API_URL', nil)}/auth/authenticate",
                            json: SignedMessage.sign(credentials))
 
       raise(NotAuthenticatedError) if response.code == 401
       raise(ApiServerError) if response.code != 200
 
-      account_info = JSON.parse(response.to_s)["data"]["attributes"]
+      account_info = JSON.parse(response.to_s)['data']['attributes']
 
-      { account: account_info["account"],
-        auth_token: account_info["auth_token"] }
+      { account: account_info['account'],
+        auth_token: account_info['auth_token'] }
     end
   end
 end

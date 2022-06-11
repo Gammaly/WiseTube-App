@@ -5,6 +5,7 @@ require_relative './app'
 
 module WiseTube
   # Web controller for WiseTube APP
+  # rubocop:disable Metrics/ClassLength
   class App < Roda
     def gh_oauth_url(config)
       url = config.GH_OAUTH_URL
@@ -175,4 +176,5 @@ module WiseTube
       end
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end

@@ -15,6 +15,11 @@ Metrics/BlockLength:
     - Rakefile
     - app/controllers/**/*
 
+Metrics/ClassLength:
+  Enabled: true
+  Exclude:
+    - app/controllers/auth.rb
+
 Security/YAMLLoad:
   Enabled: true
   Exclude:

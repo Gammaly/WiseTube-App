@@ -11,12 +11,11 @@ module WiseTube
     def initialize(config)
       @config = config
     end
-
+    
     def call(registration_data)
-      puts("===============================")
-      puts(registration_data)
+      puts('===============================')
       registration_token = SecureMessage.encrypt(registration_data)
-      registration_data['verification_url'] =
+      registration_data.to_h['verification_url'] =
         "#{@config.APP_URL}/auth/register/#{registration_token}"
 
       response = HTTP.post("#{@config.API_URL}/auth/register",

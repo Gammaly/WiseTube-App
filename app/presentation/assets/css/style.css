@@ -6,4 +6,18 @@
 
 .top-buffer { 
   margin-top:20px; 
-} 
+}
+
+.sm-buffer { 
+  margin:5px; 
+}
+
+.vertical-center {
+  /* margin: auto;
+  
+  padding: 0 0; */
+
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+}

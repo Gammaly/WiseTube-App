@@ -116,6 +116,17 @@ module WiseTube
         ensure
           routing.redirect @playlists_route
         end
+
+        # GET /search/
+        routing.get do
+          search_list = GetSearch.new(App.config).call(@current_account)
+
+          results = Search.new(search_list)
+
+          view :search, locals: {
+            current_account: @current_account, search:
+          }
+        end
       end
     end
   end

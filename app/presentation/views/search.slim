@@ -1,5 +1,5 @@
 h2 search result
-  /== "#{playlist.name}"
+  /== "#{search.input}"
 
 dl
   div class="row"
@@ -16,22 +16,27 @@ div class="row"
         thead
           tr
             th Image
+            th Name
+            th Channel
             th Link
             th Description
             th Add to playlist
         tbody
-          - playlist.links.each do |link|
+          - search_result.each do |result|
             tr
               td 
                 img {
-                  src="#{link.image}" 
+                  src="#{result.image}" 
                   height='50' class='mx-auto d-block'
                 }
+              td #{result.name}
+              td #{result.channel}
               td 
                 a href="/links/#{link.id}"
                   == "#{link.title}"
-              td #{link.description}
-              td + Add to playlist
+              td #{result.description}
+              td
+                button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newLinkModal" + Add to playlist
     div class="row"
       div class="col-xs-4"
         - if playlist.policies.can_add_links

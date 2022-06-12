@@ -3,15 +3,15 @@
 require 'http'
 
 module WiseTube
-  # Returns all links belonging to a playlist
-  class GetLink
+  # Returns all search results
+  class GetSearch
     def initialize(config)
       @config = config
     end
 
-    def call(user, link_id)
+    def call(user, search_result)
       response = HTTP.auth("Bearer #{user.auth_token}")
-                     .get("#{@config.API_URL}/links/#{link_id}")
+                     .get("#{@config.API_URL}/#{search_result}")
 
       response.code == 200 ? JSON.parse(response.body.to_s)['data'] : nil
     end

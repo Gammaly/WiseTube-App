@@ -4,9 +4,9 @@ require_relative 'playlist'
 
 module WiseTube
   # Behaviors of the currently logged in account
-  class Search
+  class SearchResult
     attr_reader :id, :name, :channel, :description, # basic info
-                :url, :image # full details
+                :link, :image # full details
 
     def initialize(info)
       process_attributes(info['attributes'])
@@ -20,7 +20,7 @@ module WiseTube
       @name           = attributes['name']
       @channel        = attributes['channel']
       @description    = attributes['description']
-      @url            = attributes['url']
+      @link            = attributes['link']
       @image          = attributes['image']
     end
 

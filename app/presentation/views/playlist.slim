@@ -1,6 +1,25 @@
 h2
   == "#{playlist.name}"
 
+form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
+  .row.vertical-align.query-bar
+    .col-md-2.col-sm-3
+      .text-right Search for Video:
+    .col-md-7.col-sm-5
+      input { 
+        type='text' name='input'
+        id='video-input' class="form-control"
+        placeholder="Benefits of Cold Shower"
+      }
+    .col-md-3.col-sm-4
+      button { 
+        type='submit' id='cik-submit' class='submit' 
+        value='submit' class="btn btn-success" 
+      } Search
+  .row
+    .col-md-12.blank-row
+br
+
 dl
   div class="row"
     div class="col-xs-3"

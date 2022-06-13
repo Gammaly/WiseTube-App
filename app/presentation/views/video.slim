@@ -1,47 +1,58 @@
-section#video
-  iframe allow=("accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture") allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/099hgtRoUZw" title=("YouTube video player") width="560" 
-  <div id="player"></div>
-  div #{link}
-  javascript:
-      // 2. This code loads the IFrame Player API code asynchronously.
-      var tag = document.createElement('script');
+div class="row top-buffer container.custom-container-width"
+  div class="col-sm-8 col-md-8 d-block mx-auto"
+    section#video
+      iframe allow=("accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture") allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/099hgtRoUZw" title=("YouTube video player") height="450" width="720" 
+    div class="note top-buffer"
+      h3 Note
+      div class="note-content" Hi, I am the note. Please write your note for SEC class. This is made by GOAT GAMMALY WISETUBE. Hi, I am the note. Please write your note for SEC class. This is made by GOAT GAMMALY WISETUBE.
 
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      // 3. This function creates an <iframe> (and YouTube player)
-      //    after the API code downloads.
-      var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-          videoId: 'M7lc1UVf-VE',
-          playerVars: {
-            'playsinline': 1
-          },
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+  div class="col-sm-4"
+    / Search bar
+    form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
+      .row.query-bar
+        .col-md-9.col-sm-9
+          input { 
+            type='text' name='q'
+            id='video-input' class="form-control"
+            placeholder="Another video?"
           }
-        });
-      }
-      // 4. The API will call this function when the video player is ready.
-      function onPlayerReady(event) {
-        event.target.playVideo();
-      }
+        .col-md-3.col-sm-3
+          button { 
+            type='submit' class='submit' 
+            value='submit' class="btn btn-primary" 
+          } Search
 
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-      var done = false;
-      function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
-        }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
+    / Word Cloud
+    div class="row"
+      div class="word-cloud container-full"
+        h3 Word Cloud
+        div class="top-buffer mx-auto"
+          ruby:
+            require 'json'
+            words = '{"focus": 5, "attention": 2, "believe": 3, "change": 2}'.to_json
+
+          canvas#word_cloud[height="310", width="360"]
+          javascript:
+            var words = #{words}
+            WordCloud(document.getElementById("word_cloud"), { list: words, backgroundColor: 'rgb(252, 186, 3, 0.2)'} );
+
+    / Comment Trend
+    div class="trend top-buffer"
+      h3 Comment Trend
+      .flex-fill.p-6.align-self-center
+        / ruby: 
+        /   require 'json'
+        /   / filingdate = filing_list.map do |filing| filing.filing_date.split('-')[0].to_i end
+        /   / filingdate = filingdate.reverse.to_json
+
+        /   / sentimentscore = filing_list.map do |filing| filing.sentiment_score.to_i end
+        /   / sentimentscore = sentimentscore.reverse.to_json
+
+        /   / rdbscore = filing_list.map do |filing| filing.rdb_score.to_i end
+        /   / rdbscore = rdbscore.reverse.to_json
+
+        / .graph
+        /   canvas#comment_trend[]
+        /   script type="module"
+        /     | import drawMultiAxisLineChart from "/assets/js/drawMultiAxisLineChart.js"; 
+        /   | drawMultiAxisLineChart('sentiment_rdb_trend', #{filingdate}, [#{rdbscore}, #{sentimentscore}]);

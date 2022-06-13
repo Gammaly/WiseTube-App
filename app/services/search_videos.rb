@@ -13,11 +13,9 @@ module WiseTube
       private
 
       def search_videos(keyword)
-        Gateway::Api.new(WiseTube::App.config)
-          .search_videos(keyword)
-          .then do |result|
-            result.success? ? Success(result.payload) : Failure(result.message)
-          end
+        Gateway::Api.new(WiseTube::App.config).search_videos(keyword).then do |result|
+          result.success? ? Success(result.payload) : Failure(result.message)
+        end
       rescue StandardError => e
         Failure("Could not search videos #{e}")
       end

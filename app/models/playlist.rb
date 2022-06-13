@@ -1,5 +1,7 @@
 # frozen_string_literal: true
+
 require 'pp'
+
 module WiseTube
   # Behaviors of the currently logged in account
   class Playlist

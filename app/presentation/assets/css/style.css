@@ -85,6 +85,10 @@ h4{
   text-align: center;
 }
 
+.center-all {
+  margin: auto
+}
+
 .vcenter {
   display: inline-block;
   vertical-align: middle;
@@ -147,4 +151,9 @@ footer {
 
 .trend {
   background-color: rgb(198, 221, 229);
+}
+
+.padding-horizontal {
+  padding-left: 25px;
+  padding-right: 25px;
 }

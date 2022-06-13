@@ -1,9 +1,34 @@
-- if videos.any?
-  - videos.each do |video|
-    h5 #{video.snippet.title}
-    br
-    h6 #{video.snippet.description}
-    br
-    img src="#{video.snippet.thumbnails.default.url}"/ 
-    br
-    br
+h2 Search Result
+
+dl
+  div class="row"
+    div class="col-xs-3"
+      dt Search Result of #{input}:
+    / div class="col-xs-9"
+    /   dd class="blockquote"
+    /     a href="#{link.url}" #{link.url}
+
+div class="row"
+  div class="col-lg-9"
+    div class="row"
+      table class="table"
+        thead
+          tr
+            th Image
+            th Name
+            th Channel
+            th Link
+            th Description
+            th Add to playlist
+        tbody
+          - if videos.any?
+            - videos.each do |video|
+              tr
+                td 
+                  img src="#{video.snippet.thumbnails.default.url}"/ 
+                td #{video.snippet.title}
+                td #{video.snippet.channelTitle}
+                td #{video.id.videoId}
+                td #{video.snippet.description}
+                td 
+                  button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newLinkModal" + Add to playlist

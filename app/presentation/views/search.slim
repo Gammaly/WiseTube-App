@@ -1,13 +1,12 @@
-h2 search result
-  /== "#{search.input}"
+h2 Search Result
 
 dl
   div class="row"
     div class="col-xs-3"
-      dt Search Result:
-    div class="col-xs-9"
-      dd class="blockquote"
-        a href="#{link.url}" #{link.url}
+      dt Search Result of #{input}:
+    / div class="col-xs-9"
+    /   dd class="blockquote"
+    /     a href="#{link.url}" #{link.url}
 
 div class="row"
   div class="col-lg-9"
@@ -22,7 +21,8 @@ div class="row"
             th Description
             th Add to playlist
         tbody
-          - search_result.each do |result|
+          - if videos.any?
+            - videos.each do |video|
             tr
               td 
                 img {

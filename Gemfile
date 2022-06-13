@@ -39,10 +39,9 @@ group :test do
   gem 'webmock'
 end
 
+gem 'dry-transaction', '~> 0.13'
+
+
 group :development, :test do
   gem 'rerun'
-end
-
-group :production do
-  gem 'pg'
 end

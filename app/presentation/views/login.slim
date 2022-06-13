@@ -5,35 +5,44 @@ link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-soc
 div class="row"
   div class="col-sm-1"
   div class="col-sm-4 flex-container"
-    div class="row"
-      div class="row"> 
-        <div class="flex-item">1</div>
-        <div class="flex-item">2</div>
-        <div class="flex-item">3</div>
-        <div class="flex-item">4</div>
-      / h4 class="text-center" Login with Username
-      / form method='post' action='/auth/login' id='form-login' accept-charset="UTF-8"
-      /   div class="form-group"
-      /     label for='input-username' Username
-      /     input type='text' name='username' id='input-username' class="form-control"
-      /   div class="form-group"
-      /     label for='input-password' Password
-      /     input type='password' name='password' id='input-password' class="form-control"
+    div class="row top-buffer"
+    h4 class="text-center top-buffer" Login with Username
+    form method='post' action='/auth/login' id='form-login' accept-charset="UTF-8"
+      div class="form-group"
+        label for='input-username' Username
+        input type='text' name='username' id='input-username' class="form-control"
+      div class="form-group"
+        label for='input-password' Password
+        input type='password' name='password' id='input-password' class="form-control"
+      
+      div class="form-group"
+        button type='submit' id='button-login' value='login' class="btn btn-primary btn-block" login
+        a class="btn btn-primary btn-block btn-social btn-google text-center top-buffer" href=google_oauth_url
+          span class="fab fa-google text-center"
+          == "Google Sign-in"
+        a class="btn btn-primary btn-block btn-social btn-github text-center top-buffer" href=gh_oauth_url
+          span class="fab fa-github"
+          == "Github Sign-in"
         
-      /   button type='submit' id='button-login' value='login' class="btn btn-primary btn-block" login
-  
-  
-  .col-sm-2.text-center
-    h4 or
-  .col-sm-4
-    .row
-      h4.text-center Login with Github
-    .row
-      a class="btn-block btn-social btn-lg btn-github" href=gh_oauth_url
-        span class="fab fa-github"
-        == "Github Sign-in"
+  / .col-sm-2.text-center
+  /   h4 or
+  / .col-sm-4
+  /   .row
+  /     h4.text-center Login with Github
+  /   .row
+  /     a class="btn-block btn-social btn-lg btn-github" href=gh_oauth_url
+  /       span class="fab fa-github"
+  /       == "Github Sign-in"
 
-      a class="btn-block btn-social btn-lg btn-google" href=google_oauth_url
-        span class="fab fa-google"
-        == "Google Sign-in"
-  .col-sm-1 
+  /     a class="btn-block btn-social btn-lg btn-google" href=google_oauth_url
+  /       span class="fab fa-google"
+  /       == "Google Sign-in"
+  / .col-sm-1
+  div class="col-sm-1"
+  div class="col-sm-4"
+    img {
+      src='app/presentation/public/images/wisetube.png'
+      height='200' class='mx-auto d-block' 
+    }
+  div class="col-sm-1"
+  

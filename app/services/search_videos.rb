@@ -21,7 +21,6 @@ module WiseTube
       rescue StandardError => e
         Failure("Could not search videos #{e}")
       end
-
     end
   end
 end

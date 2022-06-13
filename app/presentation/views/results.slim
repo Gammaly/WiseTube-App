@@ -1,0 +1,9 @@
+- if videos.any?
+  - videos.each do |video|
+    h5 #{video.snippet.title}
+    br
+    h6 #{video.snippet.description}
+    br
+    img src="#{video.snippet.thumbnails.default.url}"/ 
+    br
+    br

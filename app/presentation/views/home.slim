@@ -12,21 +12,21 @@
     } /
   h3 Simple & Focus
   h4 Filter the information you want on SEC in seconds. 
-  form role="form" action="/firm" method='POST' id='show-firm-form'
+  form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
     .row.vertical-align.query-bar
       .col-md-2.col-sm-3
-        .text-right Firm CIK:
+        .text-right Search for Video:
       .col-md-7.col-sm-5
         input { 
-          type='text' name='firm_cik'
-          id='firm-cik-input' class="form-control"
-          placeholder="e.g. 0001326801 or 1326801"
+          type='text' name='q'
+          id='video-input' class="form-control"
+          placeholder="Benefits of Cold Shower"
         }
       .col-md-3.col-sm-4
         button { 
           type='submit' id='cik-submit' class='submit' 
           value='submit' class="btn btn-success" 
-        } Show Firm's Annual Filings
+        } Search
     .row
       .col-md-12.blank-row
 

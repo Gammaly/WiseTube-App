@@ -4,17 +4,25 @@ link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-soc
 
 div class="row"
   div class="col-sm-1"
-  div class="col-sm-4"
-    h4 class="text-center" Login with credentials
-    form method='post' action='/auth/login' id='form-login' accept-charset="UTF-8"
-      div class="form-group"
-        label for='input-username' Username
-        input type='text' name='username' id='input-username' class="form-control"
-      div class="form-group"
-        label for='input-password' Password
-        input type='password' name='password' id='input-password' class="form-control"
-      
-      button type='submit' id='button-login' value='login' class="btn btn-primary btn-block" login
+  div class="col-sm-4 flex-container"
+    div class="row"
+      div class="row"> 
+        <div class="flex-item">1</div>
+        <div class="flex-item">2</div>
+        <div class="flex-item">3</div>
+        <div class="flex-item">4</div>
+      / h4 class="text-center" Login with Username
+      / form method='post' action='/auth/login' id='form-login' accept-charset="UTF-8"
+      /   div class="form-group"
+      /     label for='input-username' Username
+      /     input type='text' name='username' id='input-username' class="form-control"
+      /   div class="form-group"
+      /     label for='input-password' Password
+      /     input type='password' name='password' id='input-password' class="form-control"
+        
+      /   button type='submit' id='button-login' value='login' class="btn btn-primary btn-block" login
+  
+  
   .col-sm-2.text-center
     h4 or
   .col-sm-4

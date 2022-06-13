@@ -18,10 +18,9 @@ module WiseTube
             playlist_info = GetPlaylist.new(App.config).call(
               @current_account, playlist_id
             )
-            puts 123
-            puts playlist_info
+
             playlist = Playlist.new(playlist_info)
-            puts playlist
+
             view :playlist, locals: {
               current_account: @current_account, playlist:
             }
@@ -118,16 +117,16 @@ module WiseTube
           routing.redirect @playlists_route
         end
 
-        # GET /search/
-        routing.get do
-          search_list = GetSearch.new(App.config).call(@current_account)
+        # # GET /search/
+        # routing.get do
+        #   search_list = GetSearch.new(App.config).call(@current_account)
 
-          results = Search.new(search_list)
+        #   results = Search.new(search_list)
 
-          view :search, locals: {
-            current_account: @current_account, search:
-          }
-        end
+        #   view :search, locals: {
+        #     current_account: @current_account, search:
+        #   }
+        # end
       end
     end
   end

@@ -3,8 +3,10 @@ div class="row top-buffer container.custom-container-width"
     section#video
       iframe allow=("accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture") allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/099hgtRoUZw" title=("YouTube video player") height="450" width="720" 
     div class="note top-buffer"
-      h3 Note
-      div class="note-content" Hi, I am the note. Please write your note for SEC class. This is made by GOAT GAMMALY WISETUBE. Hi, I am the note. Please write your note for SEC class. This is made by GOAT GAMMALY WISETUBE.
+      div
+        label for='video-note-input' class="h3" Note
+      div class="note-content"
+        input type='text' name='video-note' id='video-note-input'
 
   div class="col-sm-4"
     / Search bar
@@ -29,11 +31,13 @@ div class="row top-buffer container.custom-container-width"
         div class="top-buffer mx-auto"
           ruby:
             require 'json'
-            words = '{"focus": 5, "attention": 2, "believe": 3, "change": 2}'.to_json
+            words = [["Pear", "9"],["Grape", "9"],["Pine", "4"]].to_json
+            puts words
 
           canvas#word_cloud[height="310", width="360"]
           javascript:
             var words = #{words}
+            print words
             WordCloud(document.getElementById("word_cloud"), { list: words, backgroundColor: 'rgb(252, 186, 3, 0.2)'} );
 
     / Comment Trend

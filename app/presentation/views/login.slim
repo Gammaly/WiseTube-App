@@ -4,8 +4,8 @@ link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-soc
 
 div class="row"
   div class="col-sm-1"
-  div class="col-sm-5"
-    div class="row top-buffer"
+  div class="col-sm-4 center-all"
+    div class="row top-buffer center-all"
     h4 class="text-center top-buffer" Login to enjoy WiseTube!
     form method='post' action='/auth/login' id='form-login' accept-charset="UTF-8"
       div class="form-group padding-horizontal top-buffer"
@@ -23,6 +23,8 @@ div class="row"
         a class="btn btn-primary btn-block btn-social btn-github text-center top-buffer" href=gh_oauth_url
           span class="fab fa-github"
           == "Github Sign-in"
+        h4 class="top-buffer text-link"
+          a href='/auth/register' Register now!
         
   / .col-sm-2.text-center
   /   h4 or
@@ -42,7 +44,7 @@ div class="row"
   div class="col-sm-4 center-all"
     img {
       src='/images/wisetube.png'
-      height='100' class='center-all' 
+      height='150' class='center-all' 
     }
   div class="col-sm-1"
   

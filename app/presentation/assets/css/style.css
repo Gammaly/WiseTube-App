@@ -65,6 +65,8 @@ h4{
 
 .top-buffer { margin-top:50px; }
 
+.top-buffer-big { margin-top: 350px; }
+
 .posting.body {
   font-size: 1.2em;
 }
@@ -156,4 +158,9 @@ footer {
 .padding-horizontal {
   padding-left: 25px;
   padding-right: 25px;
+}
+
+.text-link {
+  font-size: larger;
+  color: darkslategray;
 }

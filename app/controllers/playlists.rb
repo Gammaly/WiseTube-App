@@ -76,7 +76,7 @@ module WiseTube
 
             flash[:notice] = 'Your link was added'
           rescue StandardError => e
-            puts "ERROR CREATING DOCUMENT: #{e.inspect}"
+            puts "ERROR CREATING LINK: #{e.inspect}"
             flash[:error] = 'Could not add link'
           ensure
             routing.redirect @playlist_route

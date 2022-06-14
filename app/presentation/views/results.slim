@@ -51,4 +51,8 @@ div class="row"
                 td #{video.id.videoId}
                 td #{video.snippet.description}
                 td 
-                  button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newLinkModal" + Add to playlist
+                  - if playlist.policies.can_add_links.each do |playlist|
+                    button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#resultAddNewLinkModal"
+                      == "#{playlist.title}"
+
+include :link_new_partial

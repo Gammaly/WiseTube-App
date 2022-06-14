@@ -1,29 +1,37 @@
 div class="row"
-  div class="col-sm-3"
-  div class="col-sm-6"
+  div class="col-sm-1"
+  div class="col-sm-4"
     form action="/account/#{registration_token}" method='post' id='user-form'
-      div class="form-group"
-        div class="row"
-          div class="col-sm-3" Username:
-          div class="col-sm-9"
+      div class="form-group top-buffer"
+        div class="row top-buffer"
+          h5 class="col-sm-6" Username:
+          div class="col-sm-6"
             == new_account['username']
-        div class="row"
-          div class="col-sm-3" Email:
-          div class="col-sm-9"
+        div class="row top-buffer-sm"
+          h5 class="col-sm-6" Email:
+          div class="col-sm-6"
             == new_account['email']
 
-      div class="form-group"
-        div class="row"
-          div class="col-sm-3"
-            label for='password_input' Password: 
-          div class="col-sm-9"
+      div class="form-group top-buffer-sm"
+        div class="row top-buffer-sm"
+          div class="col-sm-6"
+            label for='password_input' class="h5" Password: 
+          div class="col-sm-6"
             input type='password' name='password' id='password_input'
-      div class="form-group"
-        div class="row"
-          div class="col-sm-3"
-            label for='password_confirm_input' Re-enter Password: 
-          div class="col-sm-9"
+      div class="form-group top-buffer-sm"
+        div class="row top-buffer-sm"
+          div class="col-sm-6"
+            label for='password_confirm_input' class="h5" Re-enter Password: 
+          div class="col-sm-6"
             input type='password' name='password_confirm' id='password_confirm_input'
 
-      button type='submit' id='registration-form-submit' class='submit' value='submit' class="btn btn-primary" submit
-  div class="col-sm-3"
+      div class="row top-buffer padding-horizontal"
+        button type='submit' id='registration-form-submit' class='submit' value='submit' class="btn btn-primary btn-block" submit
+  
+  / Logo image
+  div class="col-sm-3 center-all"
+    img {
+      src='/images/wisetube.png'
+      height='150' class='center-all' 
+    }
+  div class="col-sm-1"

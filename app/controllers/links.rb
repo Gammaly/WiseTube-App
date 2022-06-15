@@ -14,13 +14,13 @@ module WiseTube
                            .call(@current_account, link_id)
         link = Link.new(link_info)
 
-        # view :link, locals: {
+        view :link, locals: {
+          current_account: @current_account, link:
+        }
+
+        # view :video, locals: {
         #   current_account: @current_account, link:
         # }
-
-        view :video, locals: {
-          current_account: @current_account, link: link, link_id:
-        }
       end
     end
   end

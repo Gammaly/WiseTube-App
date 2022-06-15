@@ -6,7 +6,7 @@ module WiseTube
   # Behaviors of the currently logged in account
   class Link
     attr_reader :id, :title, :description, # basic info
-                :url, :image, :note, :comment,
+                :url, :image, :note, :comment, :video_id,
                 :playlist # full details
 
     def initialize(info)
@@ -24,6 +24,7 @@ module WiseTube
       @image          = attributes['image']
       @note           = attributes['note']
       @comment        = attributes['comment']
+      @video_id       = attributes['url'].match(%r{https://www\.youtube\.com/watch\?v=(.*)}i).captures.first
     end
 
     def process_included(included)

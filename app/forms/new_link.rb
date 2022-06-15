@@ -12,7 +12,8 @@ module WiseTube
         required(:title).filled(max_size?: 256, format?: FILENAME_REGEX)
         required(:description).maybe(:string)
         required(:url).filled(format?: PATH_REGEX)
-        required(:image).filled(format?: PATH_REGEX)
+        # required(:note).filled(format?: PATH_REGEX)
+        # required(:comment).filled(format?: PATH_REGEX)
       end
     end
   end

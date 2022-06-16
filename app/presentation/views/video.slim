@@ -37,11 +37,17 @@ div class="row top-buffer container.custom-container-width"
         div class="col-sm-9 col-md-9 col-lg-9 top-buffer-sm padding-horizontal"
           label for='video-note-input' class="h3" Note
         div class="col-sm-1 top-buffer-sm"
-          form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
-            input {
-              type='submit' class='submit' 
-              value='Time' class="btn btn-primary"
+          javascript: 
+            function insertSec() {
+              var sec = Math.round( player.getCurrentTime() );
+              var text = simplemde.value();
+              simplemde.value(text+'\n[Time '+sec+']'+'(#'+sec+') ');  
             }
+            document.addEventListener("click", function() {
+              var sec = document.URL.split("#")[1];
+              player.seekTo(sec);
+            });
+          button class="btn btn-primary" onclick="insertSec()" Time
         div class="col-sm-1 top-buffer-sm"
           form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
             input {

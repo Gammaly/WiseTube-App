@@ -11,23 +11,27 @@ div class="row top-buffer container.custom-container-width"
           label for='video-note-input' class="h3" Note
         div class="col-sm-1 top-buffer-sm"
           form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
-            button {
+            input {
               type='submit' class='submit' 
-              value='submit' class="btn btn-primary"
-            } Edit
+              value='Edit' class="btn btn-primary"
+            }
         div class="col-sm-1 top-buffer-sm"
           form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
-            button {
+            input {
               type='submit' class='submit' 
-              value='submit' class="btn btn-primary"
-            } Save
+              value='Save' class="btn btn-primary"
+              form='video-note-input'
+            }
       div class="note-content d-block mx-auto"
         / div #{link.note}
-        textarea {
-          type='text' name='video-note'
-          id='video-note-input' placeholder="Write down your thoughts"
-          cols="55" rows='3'
-        }
+        form role="form" action="/note/#{link.id}/" method='POST' id='video-note' enctype="application/x-www-form-urlencoded"
+          textarea {
+            type='text' name='video-note'
+            id='video-note-input' placeholder="Write down your thoughts"
+            cols="55" rows='3'
+          }
+      javascript:
+        var simplemde = new SimpleMDE({ element: document.getElementById("video-note-input") });
 
   div class="col-sm-4"
     / Search bar

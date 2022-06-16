@@ -40,6 +40,7 @@ group :test do
 end
 
 gem 'dry-transaction', '~> 0.13'
+gem 'stopwords-filter'
 
 
 group :development, :test do

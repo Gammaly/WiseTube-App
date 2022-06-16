@@ -7,7 +7,7 @@ div class="row top-buffer container.custom-container-width"
     / Note   
     div class="note top-buffer"
       div class="row"
-        div class="col-sm-9 top-buffer-sm padding-horizontal"
+        div class="col-sm-9 col-md-9 col-lg-9 top-buffer-sm padding-horizontal"
           label for='video-note-input' class="h3" Note
         div class="col-sm-1 top-buffer-sm"
           form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
@@ -52,7 +52,8 @@ div class="row top-buffer container.custom-container-width"
         div class="top-buffer mx-auto"
           ruby:
             require 'json'
-            words_freq = [['foo', 12], ['bar', 6]].to_json
+            words_freq = words_frequency.to_json
+            puts words_freq
 
           canvas#word_cloud[height="310", width="360"]
           javascript:

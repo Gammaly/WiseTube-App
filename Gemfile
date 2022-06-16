@@ -26,6 +26,10 @@ gem 'rbnacl' # assumes libsodium package already installed
 gem 'pry'
 gem 'rack-test'
 
+# word cloud
+gem 'stopwords-filter' #, require: 'stopwords'
+gem 'words_counted'
+
 # Development
 group :development do
   gem 'rubocop'
@@ -40,7 +44,6 @@ group :test do
 end
 
 gem 'dry-transaction', '~> 0.13'
-
 
 group :development, :test do
   gem 'rerun'

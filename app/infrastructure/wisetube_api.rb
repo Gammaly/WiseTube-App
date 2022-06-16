@@ -19,6 +19,10 @@ module WiseTube
         @request.search_videos(keyword)
       end
 
+      def get_captions(video_id)
+        @request.get_captions(video_id)
+      end
+
       # HTTP request transmitter
       class Request
         def initialize(config)
@@ -33,6 +37,10 @@ module WiseTube
           call_api('get', ['search'], 'q' => keyword)
         end
 
+        def get_captions(video_id)
+          call_api('get', ['captions'], 'q' => video_id)
+        end
+
         private
 
         def params_str(params)
@@ -43,7 +51,7 @@ module WiseTube
         def call_api(method, resources = [], params = {})
           api_path = @api_root
           url = [api_path, resources].flatten.join('/') + params_str(params)
-          puts url
+
           HTTP.headers('Accept' => 'application/json').send(method, url)
             .then { |http_response| Response.new(http_response) }
         rescue StandardError

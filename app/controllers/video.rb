@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 require 'roda'
+require 'json'
 
 module WiseTube
   # Web controller for WiseTube API
   class App < Roda
     # route('video') do |routing|
     #   link = routing.params["q"].to_s
-    #   puts link
     #   view :video, locals: {
     #     link: link
     #     }
@@ -22,8 +22,11 @@ module WiseTube
                            .call(@current_account, link_id)
         link = Link.new(link_info)
 
+        words_frequency = JSON.parse(Service::CalculateWordFrequency.new.call(link.video_id).value!,
+                                     object_class: OpenStruct)['data']
+
         view :video, locals: {
-          current_account: @current_account, link:
+          current_account: @current_account, link:, words_frequency:
         }
       end
     end

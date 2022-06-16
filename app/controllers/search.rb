@@ -10,11 +10,10 @@ module WiseTube
     route('search') do |routing|
       q = routing.params["q"].to_s
       q = ERB::Util.url_encode(q)
-      puts q
       videos = JSON.parse(Service::SearchVideos.new.call(q).value!, object_class: OpenStruct)['data']
       view :results, locals: {
-        videos: videos
-        }
+        videos:
+      }
     end
   end
 end

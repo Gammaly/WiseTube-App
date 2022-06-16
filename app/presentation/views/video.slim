@@ -20,11 +20,11 @@ div class="row top-buffer container.custom-container-width"
             input {
               type='submit' class='submit' 
               value='Save' class="btn btn-primary"
-              form='video-note-input'
+              form='video-note'
             }
       div class="note-content d-block mx-auto"
         / div #{link.note}
-        form role="form" action="/note/#{link.id}/" method='POST' id='video-note' enctype="application/x-www-form-urlencoded"
+        form role="form" action="/note/#{link.id}/" method='POST' id='video-note' 
           textarea {
             type='text' name='video-note'
             id='video-note-input' placeholder="Write down your thoughts"
@@ -32,6 +32,7 @@ div class="row top-buffer container.custom-container-width"
           }
       javascript:
         var simplemde = new SimpleMDE({ element: document.getElementById("video-note-input") });
+        simplemde.value("#{link.note}");
 
   div class="col-sm-4"
     / Search bar

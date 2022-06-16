@@ -41,7 +41,8 @@ div class="row top-buffer container.custom-container-width"
             function insertSec() {
               var sec = Math.round( player.getCurrentTime() );
               var text = simplemde.value();
-              simplemde.value(text+'\n[Time '+sec+']'+'(#'+sec+') ');  
+              var mmss = new Date(sec * 1000).toISOString().substring(14, 19)
+              simplemde.value(text+'\n[Time '+mmss+']'+'(#'+sec+') ');  
             }
             function removeHash () { 
               history.pushState("", document.title, window.location.pathname

@@ -21,7 +21,8 @@ module WiseTube
 
       def get_video_captions(input)
         Gateway::Api.new(WiseTube::App.config).get_captions(input).then do |result|
-          result.success? ? Success(result.payload) : Failure(result.message)
+          puts result.data
+          result.success? ? Success(result.data) : Failure(result.message)
         end
       rescue StandardError => e
         Failure("Could not get video's captions: #{e}")
@@ -31,8 +32,9 @@ module WiseTube
         filter = Stopwords::Snowball::Filter.new 'en'
         counter = WordsCounted.count(input, exclude: ->(t) { filter.stopword? t })
         words_frequency = counter.token_frequency[0..149].select { |term_frequency| term_frequency[0].length > 2 }
-        puts words_frequency
-        words_frequency
+        Success(words_frequency)
+      rescue StandardError => e
+        Failure("Could not get video's captions: #{e}")
       end
     end
   end

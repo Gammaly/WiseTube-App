@@ -22,8 +22,7 @@ module WiseTube
                            .call(@current_account, link_id)
         link = Link.new(link_info)
 
-        words_frequency = JSON.parse(Service::CalculateWordFrequency.new.call(link.video_id).value!,
-                                     object_class: OpenStruct)['data']
+        words_frequency = Service::CalculateWordFrequency.new.call(link.video_id).value!
 
         view :video, locals: {
           current_account: @current_account, link:, words_frequency:

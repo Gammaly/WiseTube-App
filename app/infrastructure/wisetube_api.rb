@@ -89,6 +89,10 @@ module WiseTube
           JSON.parse(payload)['message']
         end
 
+        def data
+          JSON.parse(payload)['data']
+        end
+
         def payload
           body.to_s
         end

@@ -1,11 +1,55 @@
-- if videos.any?
-  - videos.each do |video|
-    h5 #{video.snippet.title}
-    br
-    h6 #{video.snippet.description}
-    br
-    img src="#{video.snippet.thumbnails.default.url}"/ 
-    form method='post' action='/auth/login' id='form-login' accept-charset="UTF-8"
-      button type='submit' id='button-login' value='login' class="btn btn-primary btn-block" video
-    br
-    br
+.col-12.col-md-4.col-sm-6
+  h2 Search Result
+
+form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
+    .row.vertical-align.query-bar
+      .col-md-2.col-sm-3
+        .text-right Search for Video:
+      .col-md-7.col-sm-5
+        input { 
+          type='text' name='input'
+          id='video-input' class="form-control"
+          placeholder="Benefits of Cold Shower"
+        }
+      .col-md-3.col-sm-4
+        button { 
+          type='submit' id='cik-submit' class='submit' 
+          value='submit' class="btn btn-success" 
+        } Search
+    .row
+      .col-md-12.blank-row
+br
+
+dl
+  div class="row"
+    div class="col-xs-3"
+      / dt Search Result of #{input}:
+
+div class="row"
+  div class="col-lg-9"
+    div class="row"
+      table class="table"
+        thead
+          tr
+            th Image
+            th Name
+            th Channel
+            th Link
+            th Description
+            th Add to playlist
+        tbody
+          - if videos.any?
+            - videos.each do |video|
+              tr
+                td 
+                  img src="#{video.snippet.thumbnails.default.url}"/ 
+                td #{video.snippet.title}
+                td #{video.snippet.channelTitle}
+                td #{video.id.videoId}
+                td #{video.snippet.description}
+                td 
+                  / - if playlist.policies.can_add_links.each do |playlist|
+                  /   button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#resultAddNewLinkModal"
+                  /     == "#{playlist.title}"
+
+/include :result_new_partial

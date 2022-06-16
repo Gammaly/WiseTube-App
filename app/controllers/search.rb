@@ -12,7 +12,7 @@ module WiseTube
       q = ERB::Util.url_encode(q)
       videos = JSON.parse(Service::SearchVideos.new.call(q).value!, object_class: OpenStruct)['data']
       view :results, locals: {
-        videos:
+        videos:, q:
       }
     end
   end

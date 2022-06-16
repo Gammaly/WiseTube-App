@@ -92,22 +92,22 @@ div class="row top-buffer container.custom-container-width"
     / Word Cloud
     div class="row"
       div class="word-cloud container-full"
-        h3 Word Cloud
-        div class="top-buffer mx-auto"
+        h3 Video Summary
+        div class="mx-auto"
           ruby:
             require 'json'
             words_freq = words_frequency.to_json
             puts words_freq
 
-          canvas#word_cloud[height="310", width="360"]
+          canvas#word_cloud[height="322", width="360"]
           javascript:
             var words = #{{words_freq}}
             console.log(words)
-            WordCloud(document.getElementById("word_cloud"), { list: words, size: 5, backgroundColor: 'rgb(252, 186, 3, 0.2)'} );
+            WordCloud(document.getElementById("word_cloud"), { list: words, weightFactor: 8, size: 5, backgroundColor: 'rgb(252, 186, 3, 0.2)'} );
 
     / Comment Trend
     div class="trend top-buffer"
-      h3 Comment Trend
+      h3 Coming Soon
       .flex-fill.p-6.align-self-center
         / ruby: 
         /   require 'json'

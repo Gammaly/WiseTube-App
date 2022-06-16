@@ -43,9 +43,14 @@ div class="row top-buffer container.custom-container-width"
               var text = simplemde.value();
               simplemde.value(text+'\n[Time '+sec+']'+'(#'+sec+') ');  
             }
+            function removeHash () { 
+              history.pushState("", document.title, window.location.pathname
+                                + window.location.search);
+            }
             document.addEventListener("click", function() {
-              var sec = document.URL.split("#")[1];
-              player.seekTo(sec);
+              var sp = document.URL.split("#");
+              if(sp.length==2) player.seekTo(sp[1]);
+              removeHash();
             });
           button class="btn btn-primary" onclick="insertSec()" Time
         div class="col-sm-1 top-buffer-sm"

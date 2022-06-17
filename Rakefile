@@ -4,7 +4,7 @@ require 'rake/testtask'
 require './require_app'
 
 task :print_env do
-  puts "Environment: #{ENV['RACK_ENV'] || 'development'}"
+  puts "Environment: #{ENV.fetch('RACK_ENV', 'development')}"
 end
 
 desc 'Run application console (pry)'

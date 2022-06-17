@@ -8,9 +8,9 @@ module WiseTube
   # Web controller for WiseTube API
   class App < Roda
     route('search') do |routing|
-      q = routing.params["q"].to_s
+      q = routing.params['q'].to_s
       q = ERB::Util.url_encode(q)
-      videos = JSON.parse(Service::SearchVideos.new.call(q).value!, object_class: OpenStruct)['data']
+      videos = JSON.parse(Service::SearchVideos.new.call(q).value!, object_class: Struct)['data']
       view :results, locals: {
         videos:, q:
       }

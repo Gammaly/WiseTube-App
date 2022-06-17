@@ -27,7 +27,7 @@ gem 'pry'
 gem 'rack-test'
 
 # word cloud
-gem 'stopwords-filter' #, require: 'stopwords'
+gem 'stopwords-filter' # , require: 'stopwords'
 gem 'words_counted'
 
 # Development

@@ -31,7 +31,7 @@ module WiseTube
     end
 
     def process_policies(policies)
-      @policies = OpenStruct.new(policies)
+      @policies = Struct.new(policies)
     end
 
     def process_links(links_info)

@@ -35,3 +35,23 @@ Style/RedundantRegexpEscape:
   Enabled: true
   Exclude:
     - app/forms/form_base.rb
+
+Metrics/MethodLength:
+  Enabled: true
+  Exclude:
+    - app/services/verify_registration.rb
+
+Metrics/ClassLength:
+  Enabled: true
+  Exclude:
+  - app/controllers/auth.rb
+
+Style/StringConcatenation:
+  Enabled: true
+  Exclude:
+    - app/infrastructure/wisetube_api.rb
+
+Style/HashSyntax:
+  Enabled: true
+  Exclude:
+  - Rakefile

@@ -29,7 +29,7 @@ module WiseTube
             .post(@config.GH_TOKEN_URL,
                   form: { client_id: @config.GH_CLIENT_ID,
                           client_secret: @config.GH_CLIENT_SECRET,
-                          code: code })
+                          code: })
       raise UnauthorizedError unless challenge_response.status < 400
 
       JSON.parse(challenge_response)['access_token']
@@ -40,10 +40,10 @@ module WiseTube
       #   HTTP.post("#{@config.API_URL}/auth/gh_sso",
       #             json: { access_token: access_token })
       # END
-      
-      signed_sso_info = { access_token: access_token }
-        .then { |sso_info| SignedMessage.sign(sso_info) }
-          
+
+      signed_sso_info = { access_token: }
+                        .then { |sso_info| SignedMessage.sign(sso_info) }
+
       response = HTTP.post(
         "#{@config.API_URL}/auth/gh_sso",
         json: signed_sso_info

@@ -29,9 +29,9 @@ module WiseTube
             .post(@config.GOOGLE_TOKEN_URL,
                   form: { client_id: @config.GOOGLE_CLIENT_ID,
                           client_secret: @config.GOOGLE_CLIENT_SECRET,
-                          code: code,
-                          grant_type: "authorization_code",
-                          redirect_uri: @config.GOOGLE_REDIRECT_URI})
+                          code:,
+                          grant_type: 'authorization_code',
+                          redirect_uri: @config.GOOGLE_REDIRECT_URI })
 
       raise UnauthorizedError unless challenge_response.status < 400
 
@@ -41,7 +41,7 @@ module WiseTube
     def get_sso_account_from_api(access_token)
       response =
         HTTP.post("#{@config.API_URL}/auth/google_sso",
-                  json: { access_token: access_token })
+                  json: { access_token: })
       raise if response.code >= 400
 
       account_info = JSON.parse(response)['data']['attributes']

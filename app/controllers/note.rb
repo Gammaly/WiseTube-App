@@ -3,7 +3,6 @@
 require_relative './app'
 require 'pp'
 
-# rubocop:disable Metrics/BlockLength
 module WiseTube
   # Web controller for WiseTube API
   class App < Roda
@@ -16,10 +15,10 @@ module WiseTube
         routing.post do
           note = routing.params['video-note']
           puts "note: #{note}"
-          note = AddNote.new(App.config).call(
+          AddNote.new(App.config).call(
             current_account: @current_account,
-            link_id: link_id,
-            note: note
+            link_id:,
+            note:
           )
 
           routing.redirect @link_route
@@ -31,4 +30,3 @@ module WiseTube
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

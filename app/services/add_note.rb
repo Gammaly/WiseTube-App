@@ -17,7 +17,7 @@ module WiseTube
       puts "send note:#{note}"
       response = HTTP.auth("Bearer #{current_account.auth_token}")
                      .post("#{api_url}/note/#{link_id}/",
-                          json: { note: note })
+                           json: { note: })
 
       raise NoteNotAdded unless response.code == 200
     end

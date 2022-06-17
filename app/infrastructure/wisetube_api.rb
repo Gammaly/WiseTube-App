@@ -45,7 +45,7 @@ module WiseTube
 
         def params_str(params)
           params.map { |key, value| "#{key}=#{value}" }.join('&')
-            .then { |str| str ? '?' + str : '' }
+                .then { |str| str ? '?' + str : '' }
         end
 
         def call_api(method, resources = [], params = {})
@@ -53,7 +53,7 @@ module WiseTube
           url = [api_path, resources].flatten.join('/') + params_str(params)
 
           HTTP.headers('Accept' => 'application/json').send(method, url)
-            .then { |http_response| Response.new(http_response) }
+              .then { |http_response| Response.new(http_response) }
         rescue StandardError
           raise "Invalid URL request: #{url}"
         end

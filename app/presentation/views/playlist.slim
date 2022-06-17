@@ -37,7 +37,6 @@ div class="row"
             th Image
             th Link
             th Description
-            th Note
         tbody
           - playlist.links.each do |link|
             tr
@@ -50,7 +49,6 @@ div class="row"
                 a href="/video/#{link.id}"
                   == "#{link.title}"
               td #{link.description}
-              td + Note
     div class="row"
       div class="col-xs-4"
         - if playlist.policies.can_add_links

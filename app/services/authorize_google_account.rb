@@ -39,9 +39,18 @@ module WiseTube
     end
 
     def get_sso_account_from_api(access_token)
-      response =
-        HTTP.post("#{@config.API_URL}/auth/google_sso",
-                  json: { access_token: })
+      # response =
+      #   HTTP.post("#{@config.API_URL}/auth/google_sso",
+      #             json: { access_token: })
+      # raise if response.code >= 400
+      
+      signed_sso_info = { access_token: }
+      .then { |sso_info| SignedMessage.sign(sso_info) }
+
+      response = HTTP.post(
+        "#{@config.API_URL}/auth/google_sso",
+        json: signed_sso_info
+      )
       raise if response.code >= 400
 
       account_info = JSON.parse(response)['data']['attributes']

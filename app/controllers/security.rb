@@ -31,6 +31,7 @@ module Credence
           strict: true
         }
       }
+
       config.x_frame_options = 'DENY'
       config.x_content_type_options = 'nosniff'
       config.x_xss_protection = '1'

@@ -55,3 +55,9 @@ Style/HashSyntax:
   Enabled: true
   Exclude:
   - Rakefile
+
+Style/OpenStructUse:
+  Enabled: true
+  Exclude:
+  - app/controllers/search.rb
+  - app/models/playlist.rb

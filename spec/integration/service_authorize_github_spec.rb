@@ -32,8 +32,7 @@ describe 'Test Service Objects' do
                headers: {
                  'Connection' => 'close',
                  'Content-Type' => 'application/json; charset=UTF-8',
-                 'Host' => 'localhost:3000',
-                 'User-Agent' => 'http.rb/5.0.4'
+                 'Host' => 'localhost:3000'
                }
              )
              .to_return(status: 200, body: auth_return_json, headers: {})

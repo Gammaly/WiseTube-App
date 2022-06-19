@@ -12,7 +12,6 @@ module WiseTube
       @config = config
     end
 
-    # rubocop:disable Metrics/MethodLength
     def call(registration_data)
       registration_data = registration_data.to_h
       registration_token = SecureMessage.encrypt(registration_data)
@@ -29,6 +28,5 @@ module WiseTube
     rescue HTTP::ConnectionError
       raise(ApiServerError)
     end
-    # rubocop:enable Metrics/MethodLength
   end
 end

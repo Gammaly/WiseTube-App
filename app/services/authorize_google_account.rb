@@ -23,7 +23,6 @@ module WiseTube
 
     private
 
-    # rubocop:disable Metrics/MethodLength
     def get_access_token_from_google(code)
       challenge_response =
         HTTP.headers(accept: 'application/json')
@@ -37,7 +36,6 @@ module WiseTube
 
       JSON.parse(challenge_response)['access_token']
     end
-    # rubocop:enable Metrics/MethodLength
 
     def get_sso_account_from_api(access_token)
       signed_sso_info = { access_token: }

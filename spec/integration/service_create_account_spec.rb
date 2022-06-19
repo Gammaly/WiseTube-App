@@ -5,7 +5,6 @@ require 'webmock/minitest'
 describe 'Test CreateAccount Service Objects' do
   before do
     @credentials = { email: 'gammaly@gmail.com', username: 'gammaly', password: 'mypa$$w0rd' }
-    # @mal_credentials = { username: 'soumya.ray', password: 'wrongpassword' }
     @api_account = { username: 'gammaly', email: 'gammaly@gmail.com' }
   end
 

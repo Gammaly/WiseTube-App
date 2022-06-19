@@ -1,4 +1,4 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 
 # require_relative '../spec_helper'
 # require 'webmock/minitest'
@@ -45,7 +45,8 @@
 #              .with(
 #                body: "{\"data\":{\"username\":\"gammaly\",\"email\":\"gammaly@gmail.com\",\"verification_url\":\"http://localhost:9292/auth/register/Dac41vKYr0z3MetCWxyLgQSQiMUmA9UWlIETTyF-B8kHtqDfYf9GktjrSnunl9GBRQZPjXrZMMQl6hZbIVeTKd8fhCsQcz-GGuFZgIpIMdjJMix7c0KlK3Ij\"},\"signature\":\"StB1VxUpNJJzfRe80DwCOE5LUZsymx+IykplTBGpUn8Vh1Tb2kseBE58Ygjzb7gsxXwGPVPGbBgFEq26e7bUCA==\"}"
 #              )
-#              .to_return(status: 202, body: verify_registration_return_json, headers: { 'content-type' => 'application/json' })
+#              .to_return(status: 202, body: verify_registration_return_json,
+#                         headers: { 'content-type' => 'application/json' })
 
 #       verified_registration = WiseTube::VerifyRegistration.new(APP_CONFIG).call(@registration_data)
 #       verified_registration = verified_registration['attributes']

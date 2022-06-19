@@ -35,11 +35,12 @@ describe 'Test Service Objects' do
                         headers: { 'content-type' => 'application/json' })
 
       WebMock.stub_request(:put, "#{API_URL}/playlists/1/collaborators")
-      .with(body: @collaborator.to_json)
-      .to_return(body: add_collaborator_json,
-                  headers: { 'content-type' => 'application/json' })
-  
-      response = WiseTube::AddCollaborator.new(APP_CONFIG).call(current_account: auth_os, collaborator: @collaborator , playlist_id: 1)
+             .with(body: @collaborator.to_json)
+             .to_return(body: add_collaborator_json,
+                        headers: { 'content-type' => 'application/json' })
+
+      response = WiseTube::AddCollaborator.new(APP_CONFIG).call(current_account: auth_os,
+                                                                collaborator: @collaborator, playlist_id: 1)
       response = response['attributes']
       _(response).wont_be_nil
       _(response['username']).must_equal @api_account[:username]

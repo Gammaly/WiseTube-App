@@ -7,7 +7,7 @@ describe 'Test AddNote Service Objects' do
     @credentials = { username: 'soumya.ray', password: 'mypa$$w0rd' }
     @link_id = 1
     @note = { note: 'this is a test note' }
-    @note_data = { note: 'this is a test note', id: '9d3211cd-c394-4094-b67e-9d2595434768'}
+    @note_data = { note: 'this is a test note', id: '9d3211cd-c394-4094-b67e-9d2595434768' }
   end
 
   after do
@@ -36,9 +36,8 @@ describe 'Test AddNote Service Objects' do
              .to_return(status: 200, body: create_note_json,
                         headers: { 'content-type' => 'application/json' })
 
-      note_created = WiseTube::AddNote.new(APP_CONFIG)
-                                            .call(current_account: auth_os, link_id: @link_id, **@note)
-      note_created = note_created['attributes'] 
+      note_created = WiseTube::AddNote.new(APP_CONFIG).call(current_account: auth_os, link_id: @link_id, **@note)
+      note_created = note_created['attributes']
       _(note_created).wont_be_nil
       _(note_created['note']).must_equal @note_data[:note]
       _(note_created['id']).must_equal @note_data[:id]

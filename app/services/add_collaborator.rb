@@ -18,6 +18,7 @@ module WiseTube
                      .put("#{api_url}/playlists/#{playlist_id}/collaborators",
                           json: { email: collaborator[:email] })
       raise CollaboratorNotAdded unless response.code == 200
+
       response.code == 200 ? JSON.parse(response.body.to_s)['data'] : nil
     end
   end

@@ -23,7 +23,7 @@ describe 'Test Service Objects' do
              .with(headers: { 'Accept' => 'application/json' })
              .to_return(body: word_freqency_json,
                         headers: { 'content-type' => 'application/json' })
-  
+
       response = WiseTube::Service::CalculateWordFrequency.new.call(@video_id)
       _(response).wont_be_nil
     end

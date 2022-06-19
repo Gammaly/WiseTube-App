@@ -20,21 +20,23 @@ describe 'Test Service Objects' do
 
       auth_return_json = File.read(auth_account_file)
 
-      WebMock.stub_request(:post, "https://github.com/login/oauth/access_token")
-             .with(body: {"client_id"=>"46373e75bcc1d9ff0f93", "client_secret"=>"efc18a3fb7af94a9e0d18f1fda2a1198c17ce9f2", "code"=>"123"})
+      WebMock.stub_request(:post, 'https://github.com/login/oauth/access_token')
+             .with(body: { 'client_id' => '46373e75bcc1d9ff0f93',
+                           'client_secret' => 'efc18a3fb7af94a9e0d18f1fda2a1198c17ce9f2', 'code' => '123' })
              .to_return(body: auth_return_json,
                         headers: { 'content-type' => 'application/json' })
 
-      WebMock.stub_request(:post, "http://localhost:3000/api/v1/auth/gh_sso").
-      with(
-        body: "{\"data\":{\"access_token\":null},\"signature\":\"VK4CYnrR0kHGM0ipDVabA2VUx/zx9kKis8XKZP0wR3fVH8tkQy1ZiZaMi9dmAkrDmhOaVNzbBKa20g9pgHMkDA==\"}",
-        headers: {
-        'Connection'=>'close',
-        'Content-Type'=>'application/json; charset=UTF-8',
-        'Host'=>'localhost:3000',
-        'User-Agent'=>'http.rb/5.0.4'
-        }).
-      to_return(status: 200, body: auth_return_json, headers: {})
+      WebMock.stub_request(:post, 'http://localhost:3000/api/v1/auth/gh_sso')
+             .with(
+               body: '{"data":{"access_token":null},"signature":"VK4CYnrR0kHGM0ipDVabA2VUx/zx9kKis8XKZP0wR3fVH8tkQy1ZiZaMi9dmAkrDmhOaVNzbBKa20g9pgHMkDA=="}',
+               headers: {
+                 'Connection' => 'close',
+                 'Content-Type' => 'application/json; charset=UTF-8',
+                 'Host' => 'localhost:3000',
+                 'User-Agent' => 'http.rb/5.0.4'
+               }
+             )
+             .to_return(status: 200, body: auth_return_json, headers: {})
 
       authorized = WiseTube::AuthorizeGithubAccount.new(APP_CONFIG).call(@code)
 

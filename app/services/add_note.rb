@@ -19,6 +19,7 @@ module WiseTube
                            json: { note: })
 
       raise NoteNotAdded unless response.code == 200
+
       response.code == 200 ? JSON.parse(response.body.to_s)['data'] : nil
     end
   end

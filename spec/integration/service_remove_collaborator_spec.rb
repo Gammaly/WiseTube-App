@@ -33,8 +33,9 @@ describe 'Test Service Objects' do
              .with(body: @collaborator.to_json)
              .to_return(body: add_collaborator_json,
                         headers: { 'content-type' => 'application/json' })
-  
-      response = WiseTube::RemoveCollaborator.new(APP_CONFIG).call(current_account: auth_os, collaborator: @collaborator , playlist_id: 1)
+
+      response = WiseTube::RemoveCollaborator.new(APP_CONFIG).call(current_account: auth_os,
+                                                                   collaborator: @collaborator, playlist_id: 1)
       response = response['attributes']
       _(response).wont_be_nil
       _(response['username']).must_equal @api_account[:username]

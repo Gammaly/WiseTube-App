@@ -32,7 +32,8 @@ describe 'Test GetLink Service Objects' do
 
       WebMock.stub_request(:get, "#{API_URL}/accounts/#{@username}")
              .with(headers: { 'Authorization' => "Bearer #{auth_os.auth_token}" })
-             .to_return(status: 200, body: get_account_detail_return_json, headers: { 'content-type' => 'application/json' })
+             .to_return(status: 200, body: get_account_detail_return_json,
+                        headers: { 'content-type' => 'application/json' })
 
       account_info = GetAccountDetails.new(APP_CONFIG).call(auth_os, @username)
 

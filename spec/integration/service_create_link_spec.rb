@@ -35,8 +35,9 @@ describe 'Test CreateNewLink Service Objects' do
              .to_return(status: 201, body: create_return_json,
                         headers: { 'content-type' => 'application/json' })
 
-      link_created = WiseTube::CreateNewLink.new(APP_CONFIG)
-                                            .call(current_account: auth_os, playlist_id: @playlist_id, link_data: @link_data)
+      link_created = WiseTube::CreateNewLink.new(APP_CONFIG).call(current_account: auth_os,
+                                                                  playlist_id: @playlist_id,
+                                                                  link_data: @link_data)
       link_created = link_created['data']['attributes']
       _(link_created).wont_be_nil
       _(link_created['title']).must_equal @link_data[:title]

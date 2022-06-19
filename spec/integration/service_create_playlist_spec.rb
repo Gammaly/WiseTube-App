@@ -41,14 +41,5 @@ describe 'Test CreateNewPlaylist Service Objects' do
       _(playlist_created['name']).must_equal @api_playlist[:name]
       _(playlist_created['playlist_url']).must_equal @api_playlist[:playlist_url]
     end
-
-    # it 'BAD AUTHENTICATION: should not find a false authenticated account' do
-    #   WebMock.stub_request(:post, "#{API_URL}/auth/authenticate")
-    #          .with(body: SignedMessage.sign(@mal_credentials).to_json)
-    #          .to_return(status: 401)
-    #   _(proc {
-    #     WiseTube::AuthenticateAccount.new.call(**@mal_credentials)
-    #   }).must_raise WiseTube::AuthenticateAccount::NotAuthenticatedError
-    # end
   end
 end

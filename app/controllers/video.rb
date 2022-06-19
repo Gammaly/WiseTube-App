@@ -6,13 +6,6 @@ require 'json'
 module WiseTube
   # Web controller for WiseTube API
   class App < Roda
-    # route('video') do |routing|
-    #   link = routing.params["q"].to_s
-    #   view :video, locals: {
-    #     link: link
-    #     }
-    # end
-
     route('video') do |routing|
       routing.redirect '/auth/login' unless @current_account.logged_in?
 

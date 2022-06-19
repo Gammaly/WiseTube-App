@@ -30,20 +30,9 @@ describe 'Test GetLink Service Objects' do
       get_link_file = 'spec/fixtures/get_link.json'
       get_link_return_json = File.read(get_link_file)
 
-      WebMock.stub_request(:get, "#{API_URL}/links/#{@link_id}")
-             .to_return(status: 200, body: get_link_return_json,
-                        headers: { 'content-type' => 'application/json' })
-
-      # WebMock.stub_request(:get, 'http://localhost:3000/api/v1/playlists/f91a942a-6371-4e36-bfb4-bc1c54f535e8')
-      #        .with(
-      #          headers: {
-      #            'Authorization' => 'Bearer uDs62csNiDm4c7V_3KtABoHucNXsiU4JPG8uUkTn6w419t4AVTalMiSe9Pw74hRnlhrefPhCVKW3Y5PNDLsg5N1Sp9_47iG5vwtf8Xq4q5WI4_7H10eJyVpJRpW2xrw_3BoAkbDbRa5wuv7fO7wRz8Ay1V_Rh9zFl7QjvnHufeqSzr4LVOKKGnwNc3WdtcwF7ZfuX55Oe4JUOiaxAjbLIcW6-Cqs77zvpLbN',
-      #            'Connection' => 'close',
-      #            'Host' => 'localhost:3000',
-      #            'User-Agent' => 'http.rb/5.0.4'
-      #          }
-      #        )
-      #        .to_return(status: 200, body: '', headers: {})
+      WebMock.stub_request(:get, 'http://localhost:3000/api/v1/playlists/f91a942a-6371-4e36-bfb4-bc1c54f535e8')
+             .with(headers: { 'Authorization' => "Bearer #{auth_os.auth_token}" })
+             .to_return(status: 200, body: get_link_return_json, headers: { 'content-type' => 'application/json' })
 
       playlists_list = WiseTube::GetPlaylist.new(APP_CONFIG).call(auth_os, @link_id)
       playlists_list = playlists_list['attributes']

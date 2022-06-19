@@ -2,7 +2,7 @@
 
 require_relative '../spec_helper'
 require 'webmock/minitest'
-describe 'Test CreateNewLink Service Objects' do
+describe 'Test AddNote Service Objects' do
   before do
     @credentials = { username: 'soumya.ray', password: 'mypa$$w0rd' }
     @link_id = 1

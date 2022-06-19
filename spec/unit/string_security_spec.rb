@@ -41,15 +41,4 @@ describe 'Test secure lib' do
       _(message_signed).wont_equal message
     end
   end
-
-  # describe 'Test SecureSession' do
-  #   it 'HAPPY: should be able to create the secure session' do
-  #     @secure_session = SecureSession.new(session)
-
-  #     string = 'UnitTest'
-  #     string_security = StringSecurity.entropy(string)
-
-  #     _(string_security).wont_be_nil
-  #   end
-  # end
 end

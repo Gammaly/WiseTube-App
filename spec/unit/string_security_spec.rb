@@ -15,7 +15,7 @@ describe 'Test secure lib' do
 
   describe 'Test SecureMessage' do
     it 'HAPPY: should be able to encrypt a message' do
-      message = 'SEC 2022'
+      message = 'I love SEC 2022'
       message_encrypted = SecureMessage.encrypt(message)
 
       _(message_encrypted).wont_be_nil
@@ -23,12 +23,22 @@ describe 'Test secure lib' do
     end
 
     it 'HAPPY: should be able to decrypt a message' do
-      message = 'SEC 2022'
+      message = 'I love SEC 2022'
       message_encrypted = SecureMessage.encrypt(message)
       message_decrypted = SecureMessage.decrypt(message_encrypted)
 
       _(message_decrypted).wont_be_nil
       _(message_decrypted).must_equal message
+    end
+  end
+
+  describe 'Test SignedMessage' do
+    it 'HAPPY: should be able to sign the message' do
+      message = 'Yeah SEC 2022'
+      message_signed = SignedMessage.sign(message)
+
+      _(message_signed).wont_be_nil
+      _(message_signed).wont_equal message
     end
   end
 

@@ -19,7 +19,7 @@ describe 'Test CreateAccount Service Objects' do
       create_return_json = File.read(create_account_file)
 
       WebMock.stub_request(:post, "#{API_URL}/accounts/")
-             .with(body: SignedMessage.sign(@credentials))
+             .with(body: SignedMessage.sign(@credentials).to_json)
              .to_return(status: 201, body: create_return_json,
                         headers: { 'content-type' => 'application/json' })
 

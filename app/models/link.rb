@@ -23,7 +23,6 @@ module WiseTube
       @url            = attributes['url']
       @image          = attributes['image']
       @note           = attributes['note']
-      # @captions     = attributes['captions']
       @video_id       = attributes['url'].match(%r{https://www\.youtube\.com/watch\?v=(.*)}i).captures.first
     end
 

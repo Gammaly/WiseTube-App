@@ -6,9 +6,9 @@ describe 'Test CreateNewLink Service Objects' do
   before do
     @credentials = { username: 'soumya.ray', password: 'mypa$$w0rd' }
     @playlist_id = 1
-    @link_data = { name: 'dfgh', playlist_url: 'https://www.youtube.com/watch?v=12Hzlhpb21I&list=RDCMUC7IcJI8PUf5Z3zKxnZvTBog&start_radio=1dfgh' }
+    @link_data = {title:"SEC", description: "I love SEC", url: "https://www.youtube.com/watch?v=HsonXuJs8-s" }
   end
-
+  
   after do
     WebMock.reset!
   end
@@ -37,10 +37,11 @@ describe 'Test CreateNewLink Service Objects' do
 
       link_created = WiseTube::CreateNewLink.new(APP_CONFIG)
                                             .call(current_account: auth_os, playlist_id: @playlist_id, link_data: @link_data)
-      link_created = link_created['data']['attributes'] 
+      link_created = link_created['data']['attributes']
       _(link_created).wont_be_nil
-      _(link_created['name']).must_equal @link_data[:name]
-      _(link_created['playlist_url']).must_equal @link_data[:playlist_url]
+      _(link_created['title']).must_equal @link_data[:title]
+      _(link_created['description']).must_equal @link_data[:description]
+      _(link_created['url']).must_equal @link_data[:url]
     end
   end
 end

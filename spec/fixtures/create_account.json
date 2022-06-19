@@ -1,0 +1,10 @@
+{
+  "message": "Account created",
+  "data": {
+      "type": "account",
+      "attributes": {
+          "username": "jeannn",
+          "email": "jean@gmail.com"
+      }
+  }
+}

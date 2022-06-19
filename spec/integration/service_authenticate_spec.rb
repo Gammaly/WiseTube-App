@@ -39,7 +39,7 @@ describe 'Test Service Objects' do
       _(account['email']).must_equal @api_account[:email]
     end
 
-    it 'BAD: should not find a false authenticated account' do
+    it 'BAD AUTHENTICATION: should not find a false authenticated account' do
       WebMock.stub_request(:post, "#{API_URL}/auth/authenticate")
              .with(body: SignedMessage.sign(@mal_credentials).to_json)
              .to_return(status: 401)

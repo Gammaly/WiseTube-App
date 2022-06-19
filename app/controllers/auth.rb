@@ -5,6 +5,7 @@ require_relative './app'
 
 module WiseTube
   # Web controller for WiseTube APP
+  # rubocop:disable Metrics/ClassLength
   class App < Roda
     def gh_oauth_url(config)
       url = config.GH_OAUTH_URL
@@ -24,7 +25,6 @@ module WiseTube
     end
 
     route('auth') do |routing|
-      @oauth_callback = '/auth/gh_sso_callback'
       @login_route = '/auth/login'
       routing.is 'login' do
         # GET /auth/login
@@ -64,7 +64,7 @@ module WiseTube
           App.logger.warn "API server error: #{e.inspect}\n#{e.backtrace}"
           flash[:error] = 'Our servers are not responding -- please try later'
           response.status = 500
-          routing.redirect @login_route
+          view :login
         end
       end
 
@@ -177,4 +177,5 @@ module WiseTube
       end
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end

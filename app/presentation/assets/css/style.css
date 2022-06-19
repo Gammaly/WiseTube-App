@@ -1,7 +1,7 @@
 .force-wrap {
-  word-wrap:break-word;
-  width:100%;
-  display:block;
+  word-wrap: break-word;
+  width: 100%;
+  display: block;
 }
 h1 {
   font-weight: bold;
@@ -168,4 +168,3 @@ footer {
   font-size: larger;
   color: darkslategray;
 }
-

@@ -29,14 +29,5 @@ describe 'Test CreateAccount Service Objects' do
       _(account_created[:username]).must_equal @api_account[:username]
       _(account_created[:email]).must_equal @api_account[:email]
     end
-
-    # it 'BAD AUTHENTICATION: should not find a false authenticated account' do
-    #   WebMock.stub_request(:post, "#{API_URL}/auth/authenticate")
-    #          .with(body: SignedMessage.sign(@mal_credentials).to_json)
-    #          .to_return(status: 401)
-    #   _(proc {
-    #     WiseTube::AuthenticateAccount.new.call(**@mal_credentials)
-    #   }).must_raise WiseTube::AuthenticateAccount::NotAuthenticatedError
-    # end
   end
 end

@@ -13,8 +13,7 @@ module WiseTube
     end
 
     def call(registration_data)
-      puts("===============================")
-      puts(registration_data)
+      registration_data = registration_data.to_h
       registration_token = SecureMessage.encrypt(registration_data)
       registration_data['verification_url'] =
         "#{@config.APP_URL}/auth/register/#{registration_token}"

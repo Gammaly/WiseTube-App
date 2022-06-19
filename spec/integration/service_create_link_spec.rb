@@ -13,7 +13,7 @@ describe 'Test CreateNewLink Service Objects' do
     WebMock.reset!
   end
 
-  describe 'Playlist Creation' do
+  describe 'Link Creation' do
     it 'HAPPY: should be able to create new link into a playlist for an accounts' do
       # auth
       auth_account_file = 'spec/fixtures/auth_account.json'

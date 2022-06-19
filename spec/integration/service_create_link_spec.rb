@@ -4,9 +4,11 @@ require_relative '../spec_helper'
 require 'webmock/minitest'
 describe 'Test CreateNewPlaylist Service Objects' do
   before do
-    @credentials = { username: 'soumya.ray', password: 'mypa$$w0rd' }
     @playlist_data = { name: 'Demo', playlist_url: 'https://www.youtube.com/watch?v=12' }
-    @api_playlist = { name: 'dfgh', playlist_url: 'https://www.youtube.com/watch?v=12Hzlhpb21I&list=RDCMUC7IcJI8PUf5Z3zKxnZvTBog&start_radio=1dfgh' }
+    @credentials = { username: 'soumya.ray', password: 'mypa$$w0rd' }
+
+    # @mal_credentials = { username: 'soumya.ray', password: 'wrongpassword' }
+    @api_account = { name: 'dfgh', playlist_url: 'https://www.youtube.com/watch?v=12Hzlhpb21I&list=RDCMUC7IcJI8PUf5Z3zKxnZvTBog&start_radio=1dfgh' }
   end
 
   after do
@@ -38,8 +40,8 @@ describe 'Test CreateNewPlaylist Service Objects' do
       playlist_created = playlist_created['data']['attributes']
 
       _(playlist_created).wont_be_nil
-      _(playlist_created['name']).must_equal @api_playlist[:name]
-      _(playlist_created['playlist_url']).must_equal @api_playlist[:playlist_url]
+      _(playlist_created['name']).must_equal @api_account[:name]
+      _(playlist_created['playlist_url']).must_equal @api_account[:playlist_url]
     end
 
     # it 'BAD AUTHENTICATION: should not find a false authenticated account' do

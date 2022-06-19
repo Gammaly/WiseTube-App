@@ -5,9 +5,8 @@ require 'webmock/minitest'
 describe 'Test CreateNewLink Service Objects' do
   before do
     @credentials = { username: 'soumya.ray', password: 'mypa$$w0rd' }
-    @link_data = { title: 'Gammaly', description: 'lalala', url: '/https://www.youtube.com/watch?v=KZCCWF9idSQ' }
     @playlist_id = 1
-    @api_link = { name: 'dfgh', playlist_url: 'https://www.youtube.com/watch?v=12Hzlhpb21I&list=RDCMUC7IcJI8PUf5Z3zKxnZvTBog&start_radio=1dfgh' }
+    @link_data = { name: 'dfgh', playlist_url: 'https://www.youtube.com/watch?v=12Hzlhpb21I&list=RDCMUC7IcJI8PUf5Z3zKxnZvTBog&start_radio=1dfgh' }
   end
 
   after do
@@ -38,21 +37,10 @@ describe 'Test CreateNewLink Service Objects' do
 
       link_created = WiseTube::CreateNewLink.new(APP_CONFIG)
                                             .call(current_account: auth_os, playlist_id: @playlist_id, link_data: @link_data)
-      link_created = link_created['data']['attributes']
-
+      link_created = link_created['data']['attributes'] 
       _(link_created).wont_be_nil
-      _(link_created['title']).must_equal @api_link[:title]
-      _(link_created['description']).must_equal @api_link[:description]
-      _(link_created['url']).must_equal @api_link[:url]
+      _(link_created['name']).must_equal @link_data[:name]
+      _(link_created['playlist_url']).must_equal @link_data[:playlist_url]
     end
-
-    # it 'BAD AUTHENTICATION: should not find a false authenticated account' do
-    #   WebMock.stub_request(:post, "#{API_URL}/auth/authenticate")
-    #          .with(body: SignedMessage.sign(@mal_credentials).to_json)
-    #          .to_return(status: 401)
-    #   _(proc {
-    #     WiseTube::AuthenticateAccount.new.call(**@mal_credentials)
-    #   }).must_raise WiseTube::AuthenticateAccount::NotAuthenticatedError
-    # end
   end
 end

@@ -6,9 +6,9 @@ describe 'Test CreateNewLink Service Objects' do
   before do
     @credentials = { username: 'soumya.ray', password: 'mypa$$w0rd' }
     @playlist_id = 1
-    @link_data = {title:"SEC", description: "I love SEC", url: "https://www.youtube.com/watch?v=HsonXuJs8-s" }
+    @link_data = { title: 'SEC', description: 'I love SEC', url: 'https://www.youtube.com/watch?v=HsonXuJs8-s' }
   end
-  
+
   after do
     WebMock.reset!
   end

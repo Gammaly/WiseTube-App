@@ -16,15 +16,13 @@ describe 'Test Service Objects' do
 
   describe 'Account Creation' do
     it 'HAPPY: should be able to create new accounts' do
-      create_account_file = 'spec/fixtures/auth_account.json'
+      create_account_file = 'spec/fixtures/create_account.json'
       create_return_json = File.read(create_account_file)
 
       WebMock.stub_request(:post, "#{API_URL}/accounts")
              .with(body: SignedMessage.sign(@credentials).to_json)
              .to_return(body: create_return_json,
                         headers: { 'content-type' => 'application/json' })
-
-      _(last_response.status).must_equal 201
 
       auth = WiseTube::CreateAccount.new.call(**@credentials)
 

@@ -23,7 +23,7 @@ describe 'Test Service Objects' do
              .with(headers: { 'Accept' => 'application/json' })
              .to_return(body: video_search_json,
                         headers: { 'content-type' => 'application/json' })
-  
+
       response = WiseTube::Service::SearchVideos.new.call(@keyword)
       _(response).wont_be_nil
     end

@@ -36,11 +36,6 @@ module WiseTube
     end
 
     def get_sso_account_from_api(access_token)
-      # response =
-      #   HTTP.post("#{@config.API_URL}/auth/gh_sso",
-      #             json: { access_token: access_token })
-      # END
-
       signed_sso_info = { access_token: }
                         .then { |sso_info| SignedMessage.sign(sso_info) }
 

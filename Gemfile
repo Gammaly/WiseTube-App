@@ -21,14 +21,18 @@ gem 'redis-rack'
 gem 'dry-validation'
 gem 'rack-ssl-enforcer'
 gem 'rbnacl' # assumes libsodium package already installed
+gem 'secure_headers'
 
 # Debugging
 gem 'pry'
 gem 'rack-test'
 
-# word cloud
-gem 'stopwords-filter' # , require: 'stopwords'
+# Word cloud
+gem 'stopwords-filter'
 gem 'words_counted'
+
+# Testing coverage
+gem 'simplecov'
 
 # Development
 group :development do

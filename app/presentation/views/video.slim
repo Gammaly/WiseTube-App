@@ -1,0 +1,127 @@
+div class="row top-buffer container.custom-container-width"
+  div class="col-sm-8 col-md-8 d-block mx-auto"
+    / Video player
+    <div id="player"></div>
+     javascript:
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '450',
+          width: '720',
+          videoId: '#{link.video_id}',
+          playerVars: {
+            'playsinline': 1,
+            'modestbranding': 1,
+          },
+          events: {
+            'onReady': onPlayerReady,
+          }
+        });
+      }
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+    
+    / Note   
+    div class="note top-buffer"
+      div class="row"
+        div class="col-sm-9 col-md-9 col-lg-9 top-buffer-sm padding-horizontal"
+          label for='video-note-input' class="h3" Note
+        div class="col-sm-1 top-buffer-sm"
+          javascript: 
+            function insertSec() {
+              var sec = Math.round( player.getCurrentTime() );
+              var text = simplemde.value();
+              var mmss = new Date(sec * 1000).toISOString().substring(14, 19)
+              simplemde.value(text+'\n[Time '+mmss+']'+'(#'+sec+') ');  
+            }
+            function removeHash () { 
+              history.pushState("", document.title, window.location.pathname
+                                + window.location.search);
+            }
+            document.addEventListener("click", function() {
+              var sp = document.URL.split("#");
+              if(sp.length==2) player.seekTo(sp[1]);
+              removeHash();
+            });
+          button class="btn btn-primary" onclick="insertSec()" Time
+        div class="col-sm-1 top-buffer-sm"
+          form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
+            input {
+              type='submit' class='submit' 
+              value='Save' class="btn btn-primary"
+              form='video-note'
+            }
+      div class="note-content d-block mx-auto"
+        / div #{link.note}
+        form role="form" action="/note/#{link.id}/" method='POST' id='video-note' 
+          textarea {
+            type='text' name='video-note'
+            id='video-note-input' placeholder="Write down your thoughts"
+            cols="55" rows='3'
+          }
+      javascript:
+        var simplemde = new SimpleMDE({ element: document.getElementById("video-note-input") });
+        simplemde.value("#{link.note.inspect[1...-1]}");
+
+  div class="col-sm-4"
+    / Search bar
+    form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
+      .row.query-bar
+        .col-md-9.col-sm-9
+          input { 
+            type='text' name='q'
+            id='video-input' class="form-control"
+            placeholder="Another video?"
+          }
+        .col-md-3.col-sm-3
+          button { 
+            type='submit' class='submit' 
+            value='submit' class="btn btn-primary" 
+          } Search
+
+    / Word Cloud
+    div class="row"
+      div class="word-cloud container-full"
+        h3 Video Summary
+        div class="mx-auto"
+          ruby:
+            require 'json'
+            words_freq = words_frequency.to_json
+            puts words_freq
+
+          canvas#word_cloud[height="322", width="360"]
+          javascript:
+            var words = #{{words_freq}}
+            console.log(words)
+            WordCloud(document.getElementById("word_cloud"), { list: words, weightFactor: 8, size: 5, backgroundColor: 'rgb(252, 186, 3, 0.2)'} );
+
+    / Comment Trend
+    div class="trend top-buffer"
+      h3 Coming Soon
+      .flex-fill.p-6.align-self-center
+        / ruby: 
+        /   require 'json'
+        /   / filingdate = filing_list.map do |filing| filing.filing_date.split('-')[0].to_i end
+        /   / filingdate = filingdate.reverse.to_json
+
+        /   / sentimentscore = filing_list.map do |filing| filing.sentiment_score.to_i end
+        /   / sentimentscore = sentimentscore.reverse.to_json
+
+        /   / rdbscore = filing_list.map do |filing| filing.rdb_score.to_i end
+        /   / rdbscore = rdbscore.reverse.to_json
+
+        / .graph
+        /   canvas#comment_trend[]
+        /   script type="module"
+        /     | import drawMultiAxisLineChart from "/assets/js/drawMultiAxisLineChart.js"; 
+        /   | drawMultiAxisLineChart('sentiment_rdb_trend', #{filingdate}, [#{rdbscore}, #{sentimentscore}]);

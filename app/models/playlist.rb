@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'pp'
+
 module WiseTube
   # Behaviors of the currently logged in account
   class Playlist
@@ -29,7 +31,7 @@ module WiseTube
     end
 
     def process_policies(policies)
-      @policies = Struct.new(policies)
+      @policies = OpenStruct.new(policies)
     end
 
     def process_links(links_info)

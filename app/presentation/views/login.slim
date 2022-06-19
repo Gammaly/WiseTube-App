@@ -1,28 +1,33 @@
 / Fontawesome and Bootstrap-Social for Github buttons
 div class="row"
   div class="col-sm-1"
-  div class="col-sm-4"
-    h4 class="text-center" Login with credentials
-    form method='post' action='/auth/login' id='form-login' accept-charset="UTF-8"
-      div class="form-group"
-        label for='input-username' Username
-        input type='text' name='username' id='input-username' class="form-control"
-      div class="form-group"
-        label for='input-password' Password
-        input type='password' name='password' id='input-password' class="form-control"
-      
-      button type='submit' id='button-login' value='login' class="btn btn-primary btn-block" login
-  .col-sm-2.text-center
-    h4 or
-  .col-sm-4
-    .row
-      h4.text-center Login with Github
-    .row
-      a class="btn btn-dark btn-lg" href=gh_oauth_url
-        span class="fab fa-github"
-        == " Github Sign-in"
+  div class="col-sm-5 center-all"
+    div class="row top-buffer center-all"
+    h3 class="text-center top-buffer" Login to enjoy WiseTube!
+    div class="padding-horizontal"
+      form method='post' action='/auth/login' id='form-login' accept-charset="UTF-8"
+        div class="form-group padding-horizontal top-buffer"
+          label for='input-username' Username
+          input type='text' name='username' id='input-username' class="form-control"
+        div class="form-group padding-horizontal"
+          label for='input-password' Password
+          input type='password' name='password' id='input-password' class="form-control"
+        
+        div class="form-group padding-horizontal"
+          button type='submit' id='button-login' value='login' class="btn btn-primary btn-block" Login
+          a class="btn btn-primary btn-block btn-social btn-google text-center top-buffer" href=google_oauth_url
+            span class="fab fa-google text-center"
+            == "Google Sign-in"
+          a class="btn btn-primary btn-block btn-social btn-github text-center top-buffer" href=gh_oauth_url
+            span class="fab fa-github"
+            == "Github Sign-in"
+          h4 class="top-buffer text-link"
+            a href='/auth/register' Register now!
 
-      a class="btn-block btn-social btn-lg btn-google" href=google_oauth_url
-        span class="fab fa-google"
-        == " Google Sign-in"
-  .col-sm-1 
+  div class="col-sm-4 center-all"
+    img {
+      src='/images/wisetube.png'
+      height='150' class='center-all' 
+    }
+  div class="col-sm-1"
+  

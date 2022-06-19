@@ -3,7 +3,7 @@
 require 'http'
 
 module WiseTube
-  # Returns all playlists belonging to an account
+  # Returns all links belonging to an account
   class GetLink
     def initialize(config)
       @config = config

@@ -28,7 +28,7 @@ module Credence
         secure: true,
         httponly: true,
         samesite: {
-          strict: true
+          lax: true
         }
       }
 

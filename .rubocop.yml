@@ -35,3 +35,44 @@ Style/RedundantRegexpEscape:
   Enabled: true
   Exclude:
     - app/forms/form_base.rb
+
+Metrics/MethodLength:
+  Enabled: true
+  Exclude:
+    - app/services/verify_registration.rb
+
+Metrics/ClassLength:
+  Enabled: true
+  Exclude:
+  - app/controllers/auth.rb
+
+Style/StringConcatenation:
+  Enabled: true
+  Exclude:
+    - app/infrastructure/wisetube_api.rb
+
+Style/HashSyntax:
+  Enabled: true
+  Exclude:
+  - Rakefile
+
+Layout/LineLength:
+  Enabled: true
+  Exclude:
+  - spec/integration/service_authorize_github_spec.rb
+
+Style/OpenStructUse:
+  Enabled: true
+  Exclude:
+  - app/controllers/search.rb
+  - app/models/playlist.rb
+  - spec/integration/service_add_collaborator_spec.rb
+  - spec/integration/service_add_note_spec.rb
+  - spec/integration/service_create_link_spec.rb
+  - spec/integration/service_create_playlist_spec.rb
+  - spec/integration/service_get_account_detail_spec.rb
+  - spec/integration/service_get_all_playlists_spec.rb
+  - spec/integration/service_get_link_spec.rb
+  - spec/integration/service_get_playlist_spec.rb
+  - spec/integration/service_remove_collaborator_spec.rb
+  - spec/integration/service_verify_registration_spec.rb

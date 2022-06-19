@@ -11,7 +11,6 @@ module WiseTube
 
     def call(username:, password:)
       credentials = { username:, password: }
-
       response = HTTP.post("#{ENV.fetch('API_URL', nil)}/auth/authenticate",
                            json: SignedMessage.sign(credentials))
 

@@ -23,7 +23,6 @@ module WiseTube
 
     private
 
-    # rubocop:disable Metrics/MethodLength
     def get_access_token_from_google(code)
       challenge_response =
         HTTP.headers(accept: 'application/json')
@@ -33,15 +32,14 @@ module WiseTube
                           code:,
                           grant_type: 'authorization_code',
                           redirect_uri: @config.GOOGLE_REDIRECT_URI })
-      puts challenge_response
       raise UnauthorizedError unless challenge_response.status < 400
 
       JSON.parse(challenge_response)['access_token']
     end
-    # rubocop:enable Metrics/MethodLength
 
     def get_sso_account_from_api(access_token)
-      signed_sso_info = { access_token: }.then { |sso_info| SignedMessage.sign(sso_info) }
+      signed_sso_info = { access_token: }
+                        .then { |sso_info| SignedMessage.sign(sso_info) }
 
       response = HTTP.post(
         "#{@config.API_URL}/auth/google_sso",

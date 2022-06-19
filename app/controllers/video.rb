@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require 'roda'
-require_relative './app'
+require 'json'
 
 module WiseTube
   # Web controller for WiseTube API
   class App < Roda
-    route('links') do |routing|
+    route('video') do |routing|
       routing.redirect '/auth/login' unless @current_account.logged_in?
 
       # GET /links/[link_id]
@@ -15,8 +15,10 @@ module WiseTube
                            .call(@current_account, link_id)
         link = Link.new(link_info)
 
-        view :link, locals: {
-          current_account: @current_account, link:
+        words_frequency = Service::CalculateWordFrequency.new.call(link.video_id).value!
+
+        view :video, locals: {
+          current_account: @current_account, link:, words_frequency:
         }
       end
     end

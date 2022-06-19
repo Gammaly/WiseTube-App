@@ -1,10 +1,29 @@
 h2
   == "#{playlist.name}"
 
+form role="form" action="/search" method='GET' id='search-videos-form' enctype="application/x-www-form-urlencoded"
+  .row.vertical-align.query-bar
+    .col-md-2.col-sm-3
+      .text-right Search for Video:
+    .col-md-7.col-sm-5
+      input { 
+        type='text' name='input'
+        id='video-input' class="form-control"
+        placeholder="Benefits of Cold Shower"
+      }
+    .col-md-3.col-sm-4
+      button { 
+        type='submit' id='cik-submit' class='submit' 
+        value='submit' class="btn btn-success" 
+      } Search
+  .row
+    .col-md-12.blank-row
+br
+
 dl
   div class="row"
     div class="col-xs-3"
-      dt Playlist Playlistsitory:
+      dt Playlist Repository:
     div class="col-xs-9"
       dd class="blockquote"
         a href="#{playlist.playlist_url}" #{playlist.playlist_url}
@@ -15,13 +34,19 @@ div class="row"
       table class="table"
         thead
           tr
+            th Image
             th Link
             th Description
         tbody
           - playlist.links.each do |link|
             tr
               td 
-                a href="/links/#{link.id}"
+                img {
+                  src="#{link.image}" 
+                  height='50' class='mx-auto d-block'
+                }
+              td 
+                a href="/video/#{link.id}"
                   == "#{link.title}"
               td #{link.description}
     div class="row"

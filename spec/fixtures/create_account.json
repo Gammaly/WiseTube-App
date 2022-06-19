@@ -1,0 +1,10 @@
+{
+  "message": "Account created",
+  "data": {
+      "type": "account",
+      "attributes": {
+          "username": "gammaly",
+          "email": "gammaly@gmail.com"
+      }
+  }
+}

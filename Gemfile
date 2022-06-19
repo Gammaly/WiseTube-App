@@ -27,6 +27,13 @@ gem 'secure_headers'
 gem 'pry'
 gem 'rack-test'
 
+# Word cloud
+gem 'stopwords-filter'
+gem 'words_counted'
+
+# Testing coverage
+gem 'simplecov'
+
 # Development
 group :development do
   gem 'rubocop'
@@ -39,6 +46,8 @@ group :test do
   gem 'minitest-rg'
   gem 'webmock'
 end
+
+gem 'dry-transaction', '~> 0.13'
 
 group :development, :test do
   gem 'rerun'

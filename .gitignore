@@ -27,6 +27,10 @@ build/
 build-iPhoneOS/
 build-iPhoneSimulator/
 
+# other files
+coverage/*
+!coverage/.resultset.json
+
 ## Specific to RubyMotion (use of CocoaPods):
 #
 # We recommend against adding the Pods directory to your .gitignore. However
@@ -57,3 +61,5 @@ build-iPhoneSimulator/
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
+
+.DS_Store

@@ -11,3 +11,4 @@ require 'minitest/rg'
 require_relative 'test_load_all'
 
 API_URL = app.config.API_URL
+APP_CONFIG = app.config

@@ -2,7 +2,6 @@
 
 require_relative '../spec_helper'
 require 'webmock/minitest'
-
 describe 'Test CreateAccount Service Objects' do
   before do
     @credentials = { email: 'gammaly@gmail.com', username: 'gammaly', password: 'mypa$$w0rd' }
@@ -19,17 +18,16 @@ describe 'Test CreateAccount Service Objects' do
       create_account_file = 'spec/fixtures/create_account.json'
       create_return_json = File.read(create_account_file)
 
-      WebMock.stub_request(:post, "#{API_URL}/accounts")
-             .with(body: SignedMessage.sign(@credentials).to_json)
-             .to_return(body: create_return_json,
+      WebMock.stub_request(:post, "#{API_URL}/accounts/")
+             .with(body: SignedMessage.sign(@credentials))
+             .to_return(status: 201, body: create_return_json,
                         headers: { 'content-type' => 'application/json' })
 
-      created = WiseTube::CreateAccount.new.call(**@credentials)
+      account_created = WiseTube::CreateAccount.new(APP_CONFIG).call(**@credentials)
 
-      account = created[:data]['attributes'] # :data? 'data'?
-      _(account).wont_be_nil
-      _(account['username']).must_equal @api_account[:username]
-      _(account['email']).must_equal @api_account[:email]
+      _(account_created).wont_be_nil
+      _(account_created[:username]).must_equal @api_account[:username]
+      _(account_created[:email]).must_equal @api_account[:email]
     end
 
     # it 'BAD AUTHENTICATION: should not find a false authenticated account' do

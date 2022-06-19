@@ -23,6 +23,11 @@ module WiseTube
       )
 
       raise InvalidAccount unless response.code == 201
+
+      account_info = JSON.parse(response.to_s)['data']['attributes']
+
+      { username: account_info['username'],
+        email: account_info['email'] }
     end
   end
 end

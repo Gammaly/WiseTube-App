@@ -14,12 +14,12 @@ module WiseTube
     end
 
     def call(current_account:, link_id:, note:)
-      puts "send note:#{note}"
       response = HTTP.auth("Bearer #{current_account.auth_token}")
                      .post("#{api_url}/note/#{link_id}/",
                            json: { note: })
 
       raise NoteNotAdded unless response.code == 200
+      response.code == 200 ? JSON.parse(response.body.to_s)['data'] : nil
     end
   end
 end
